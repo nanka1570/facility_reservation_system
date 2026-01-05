@@ -1,0 +1,127 @@
+body{
+    background-color: beige;
+    text-align: center;
+}
+.username{
+    font-size: 30px;
+    text-align: center;
+    color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.qe{
+    text-align: left;
+    color: black;
+   font-size: 20px;  
+}
+.an{
+    text-align: right;
+    font-size: 20px;
+}
+.qet{
+    text-align: left;
+    color: black;
+    padding-left: 5px;
+}
+.ant{
+    text-align: right;
+    padding-right: 10px;
+}
+.an_bg::after{
+    content: "";
+    background-color: aqua;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+.qs_bg::after{
+    
+    content: "";
+    background-color: cornflowerblue;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+   
+}  
+
+.ze{
+    text-align: right;
+}
+.box{
+    height: 95%;
+    
+    bottom: 0%;
+}
+.sbox{
+    width: 100%;
+    height: 220px;   
+}
+.tbox{
+    position: fixed;
+    bottom: 10px;
+}
+/*chat_check*/
+.check{
+    text-align: center;
+    color: tomato;
+    font-size: 30px;
+    
+}
+.alart{
+    color: red;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 20%;
+}
+.comp{
+    color: chartreuse;
+    font-size: 30px;
+}
+.login{
+    text-align: center;
+    font-size: 50px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.logtext{
+    text-align: center;
+    font-size: 20px;
+}
+.addtext{
+    text-align: center;
+}
+.sucsess{
+    color: greenyellow;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 20%;
+    font-weight: bold;
+    -webkit-text-stroke-color: limegreen;
+    -webkit-text-stroke-width: 0.5px;
+}
+.bg{
+    background-color: darkseagreen;
+    width: 50%;
+    margin: auto;
+    min-height: 40%; 
+
+}
+.btext{
+    font-size: 15px;
+    margin-top: 0%;
+}
+.logbutton{
+    width: 40%;
+    background-color: skyblue;
+    font-size: 1.5em;
+    border-bottom: solid 4px #627295;
+    text-decoration: none;
+    margin-bottom: 4px;
+    
+}
+.logbutton:active {
+    /*ボタンを押したとき*/
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    border-color: black;/*線を消す*/
+    border-bottom:solid 2px ;
+     margin-bottom: 6px; 
+  }

@@ -1,0 +1,186 @@
+/* 基本スタイル */
+:root {
+    --primary-color: #4A90E2;
+    --secondary-color: #F5F5DC;
+    --accent-color: #2C3E50;
+    --success-color: #27AE60;
+    --danger-color: #E74C3C;
+    --text-color: #333;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* ヘッダー */
+.admin-header {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.admin-header h1 {
+    margin: 0;
+    color: var(--accent-color);
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+/* メインコンテンツ */
+.admin-content {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* メニューグリッド */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* ボタンスタイル */
+.menu-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform var(--transition-speed), background-color var(--transition-speed);
+}
+
+.menu-button:hover {
+    background-color: #357ABD;
+    transform: translateY(-2px);
+}
+
+.button-text {
+    display: block;
+    text-align: center;
+}
+
+/* 拡張機能セクション */
+.extension-section {
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.extension-toggle {
+    margin-bottom: 1rem;
+}
+
+.extension-toggle label {
+    font-weight: bold;
+    margin-left: 0.5rem;
+}
+
+.extension-menu {
+    padding: 1rem;
+    border-top: 1px solid #ddd;
+}
+
+.extension-menu.hidden {
+    display: none;
+}
+
+/* チェックボックスグループ */
+.checkbox-group {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* 保存ボタン */
+.save-button {
+    background-color: var(--success-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.8rem 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+.save-button:hover {
+    background-color: #219653;
+}
+
+/* ログアウトボタン */
+.logout-button {
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 1rem 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.logout-button:hover {
+    background-color: #C0392B;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-button {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .admin-header h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* .extension-toggle{
+    cursor: pointer;
+} */
+
+/* 拡張機能に👆ってなるやつ追加 */
+input[type="checkbox"]{
+    cursor: pointer;
+}
+
+label{
+    cursor: pointer;
+}

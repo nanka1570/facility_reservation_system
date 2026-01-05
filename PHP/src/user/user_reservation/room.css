@@ -1,0 +1,147 @@
+@charset "utf-8";
+
+.top{
+    height: 40px;
+    font-size: 20px;
+    color: rgba(3, 3, 170, 0.795);
+    padding: 5px 20px;
+    text-align: center;
+}
+
+
+.t{
+    font-size: 13px;
+    text-align: center;
+}
+
+
+.kaigi{
+    size: 50px;
+    padding: 0.5em 1em;
+    margin: auto;
+    font-weight: bold;
+    color: #c9732c;
+    background: rgb(131, 214, 131);
+    border: solid 2px #6091d3;
+    border-radius: 10px;
+    width: 700px;
+    height: 250px;
+    margin-bottom: 20px;
+    
+}
+
+.name{
+    font-size: 40px;
+    text-align: center;
+}
+
+.price{
+    font-size: 40px;
+    
+    
+}
+
+.kaigi p{
+    text-align: right;
+    color: #6091d3;
+
+}
+
+.aki{
+    background-color: cornflowerblue;
+    border: solid 3px #6091d3;
+   border-radius: 10px;
+   width: 150px;
+   height: 50px;
+   color: white;
+    position: absolute;
+}
+
+.yoyaku{
+    background-color: #c9732c;
+    border: solid 3px #c9732c;
+   border-radius: 10px;
+   width: 150px;
+   height: 50px;
+   color: white;
+   position: absolute;
+}
+
+.box{
+    text-align: left;
+    margin-top: -170px;
+}
+
+
+.f{
+    font-size: 20px;
+}
+.te{
+    font-size: 25px;
+    text-align: left;
+    position: absolute;
+    padding-left: 150px;
+    
+}
+.pop{
+     width: 430px; 
+     text-align: left;
+     height: 50px;
+}
+
+.money{
+    width: 430px; 
+    text-align: left;
+    height: 100px;
+    
+}
+.pritext{
+    font-size: 25px;
+    color: #c9732c;
+    text-align: left;
+    position: absolute;
+    padding-left: 150px;
+   
+}
+.akikaku{
+    height: 50px;
+    text-align: right;
+    
+}
+.yokaku{
+    height: 100px;
+    text-align: right;
+}
+
+
+
+
+
+/* ページネーション */
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: solid 2px #6091d3;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #6091d3;
+    background-color: white;
+}
+
+.pagination a:hover {
+    background-color: #6091d3;
+    color: white;
+}
+
+.pagination a.active {
+    background-color: #6091d3;
+    color: white;
+}
+

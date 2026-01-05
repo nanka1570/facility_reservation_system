@@ -1,0 +1,125 @@
+body{
+    background-color: beige;
+}
+.username{
+    font-size: 30px;
+    text-align: center;
+    color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+   
+    
+    
+}
+
+
+.qe{
+    text-align: left;
+    color: black;
+   font-size: 20px;
+    
+   
+}
+.an{
+    text-align: right;
+    font-size: 20px;
+    
+    
+}
+.qet{
+    text-align: left;
+    color: black;
+    padding-left: 5px;
+}
+.ant{
+    text-align: right;
+    padding-right: 10px;
+}
+.an_bg::after{
+    content: "";
+    background-color: aqua;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+   
+}
+.qs_bg::after{
+    
+    content: "";
+    background-color: cornflowerblue;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+   
+}  
+.an_bg{
+    width: 55%;
+    height: 200px;
+    background-color: coral;
+    overflow:auto;
+    position:absolute;
+    right: 0px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    
+}
+.qs_bg{
+    width: 55%;
+    height: 200px;
+    background-color:aqua;
+    overflow: auto;
+   padding: left;
+   position:unset ;
+   border-radius: 10px;
+   box-sizing: border-box;
+}
+
+.ze{
+    text-align: right;
+}
+.box{
+    height: 95%;
+    
+    bottom: 0%;
+}
+.sbox{
+    width: 100%;
+    height: 220px;   
+}
+.tbox{
+    position: fixed;
+    bottom: 10px;
+}
+/*chat_check*/
+.check{
+    text-align: center;
+    color: tomato;
+    font-size: 30px;
+    
+}
+.alart{
+    color: red;
+    font-size: 30px;
+    text-align: center;
+}
+.comp{
+    color: chartreuse;
+    font-size: 30px;
+}
+.login{
+    text-align: center;
+    font-size: 50px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    
+}
+.logtext{
+    text-align: center;
+}
+.addtext{
+    text-align: center;
+    
+}
+.sucsess{
+    color: greenyellow;
+    text-align: center;
+    font-size: 50px;
+}

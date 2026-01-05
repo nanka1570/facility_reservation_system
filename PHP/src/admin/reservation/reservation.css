@@ -1,0 +1,182 @@
+/* 基本変数の定義 */
+:root {
+    --primary-color: #4A90E2;
+    --secondary-color: beige;
+    --accent-color: #2C3E50;
+    --success-color: #27AE60;
+    --danger-color: #E74C3C;
+    --text-color: #333;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+    --table-border-color: #ddd;
+}
+
+/* 基本スタイル */
+body {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+/* フォーム要素 */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ボタンの基本スタイル */
+.button_css,
+input[type="submit"].button_css {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.8rem 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+    text-align: center;
+    display: inline-block;
+    margin: 0.5rem;
+    width: auto;
+    min-width: 200px;
+    font-size: 18px;
+}
+
+.button_css:hover,
+input[type="submit"].button_css:hover {
+    background-color: #357ABD;
+}
+
+/* 予約ボタン専用スタイル */
+.reserv-button,
+input[type="submit"].reserv-button {
+    width: 100%;
+    height: 100%;
+    padding: 12px 0;
+    margin: 0;
+    display: block;
+    border: none;
+    background-color: var(--success-color);
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+/* テーブルスタイル */
+table {
+    border: 2px solid var(--table-border-color);
+    border-collapse: collapse;
+    width: 100%;
+    background-color: white;
+    margin: 0.3rem;
+    border-radius: var(--border-radius);
+    table-layout: fixed;
+}
+
+th, td {
+    border: 1px solid var(--table-border-color);
+    font-size: 18px;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+/* 列の幅を調整 */
+/* table th:first-child,
+table td:first-child {
+    width: 10%;
+}
+
+table th:not(:first-child),
+table td:not(:first-child) {
+    width: 10%;
+} */
+
+.reserved {
+    font-size: 350%;
+    background-color: #E74C3C;
+    border: 1px solid var(--table-border-color);
+}
+
+.not {
+    background-color: white;
+    border: 1px solid var(--table-border-color);
+}
+
+/* フォームグループのスタイル */
+.section_css {
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.section_css p {
+    margin: 1.5rem 0 0.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.section_css select {
+    max-width: 200px;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    border: 1px solid #ddd;
+    background-color: white;
+}
+
+/* 入力フィールドのスタイル */
+input[name="number_of_user"] {
+    width: 30%;
+}
+
+input[type="text"].item_css {
+    width: 30%;
+}
+
+/* ボタングループのスタイル */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .section_css {
+        padding: 1rem;
+    }
+
+    .section_css input[type="text"],
+    .section_css input[type="number"],
+    .section_css select {
+        max-width: 100%;
+    }
+    
+    .button_css,
+    input[type="submit"].button_css {
+        width: 100%;
+    }
+}

@@ -1,0 +1,163 @@
+/* 基本変数の定義 */
+:root {
+    --primary-color: #4A90E2;
+    --secondary-color: beige;
+    --accent-color: #2C3E50;
+    --success-color: #27AE60;
+    --danger-color: #E74C3C;
+    --text-color: #333;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+}
+
+/* 基本スタイル */
+body {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* ヘッダー */
+h1 {
+    margin: 0;
+    color: var(--accent-color);
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+/* メインコンテンツ */
+.content {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+
+
+
+/* ボタン要素 */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 8px;
+    /* border: 1px solid ; */
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    /* ボタンの文字の色 */
+    color: white;
+    /* ボタンの色 */
+    background-color: #4A90E2;
+}
+
+/* テキスト入力フィールド */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="url"] {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 8px;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    /* border-radius: var(--border-radius); */
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}
+
+/* テキストエリア */
+textarea {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: 1px solid;
+    border-radius: 8px;
+    min-height: 100px;
+    resize: vertical;  /* 縦方向のリサイズのみ許可 */
+}
+
+/* セレクトボックス */
+select {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: 1px solid;
+    border-radius: 8px;
+    appearance: none;  /* ブラウザデフォルトのスタイルを削除 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;  /* 矢印アイコンのためのスペース確保 */
+}
+
+/* チェックボックスとラジオボタン */
+input[type="checkbox"],
+input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* フォームグループ */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+/* ラベル */
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+/* 無効状態のスタイル */
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* フォーカス時のスタイル */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}

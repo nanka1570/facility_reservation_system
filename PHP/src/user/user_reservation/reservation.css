@@ -1,0 +1,95 @@
+table{
+    border-color: black;
+    border-style: solid;
+    border-collapse: collapse;
+}
+th {
+    border: 1px;
+    border-style: solid;
+    min-width: 70px;
+}
+
+.no{
+    font-size: 18px;
+  
+}
+td{
+    font-size: 18px;
+    border-style: solid;
+    border: 1px;
+    border-color: black;
+}
+
+.reserved{
+    background-color: red;
+    border: 1px;
+    border-style: solid ;
+    text-align: center;
+}
+.not{
+    background-color: rgb(0, 255, 136);
+    border: 1px;
+    border-style: solid ;
+}
+body{
+    background-color: beige;
+}
+.bihin{
+    border-color: beige;
+    border-style: solid;
+    border-collapse: collapse;
+}
+select{
+    width: auto;
+    height: auto;
+    font-size: 18px;
+}
+.button{
+    font-size: 18px;
+    width: auto;
+    height: auto;
+}
+.date{
+    width: 100px;
+    height: 40px;
+}
+.bikou{
+    width: 365px;
+    height: 40px;
+}
+.font{
+    font-size: 20px;
+}
+.check{
+ text-align: center;
+ font-size: 30px;
+}
+.title{
+    text-align: center;
+    font-size: 40px;
+}
+.buttons{
+    font-size: 18px;
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+.center{
+    text-align: center;
+}
+.list{
+    border-color: black;
+    border-style: solid;
+    border-collapse: collapse;
+}
+.room{
+    border-color: beige;
+    border-style: solid;
+    border-collapse: collapse;
+    text-align: center;
+}
+.buttoncolor{
+    background-color: rgb(0, 255, 136);
+    border: none;
+    width: 70px;
+}

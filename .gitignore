@@ -1,0 +1,17 @@
+# 機密情報
+config.php
+.env
+*.env
+
+# データベース
+*.sql
+*.db
+
+# 一時ファイル
+*.log
+*.tmp
+*.cache
+
+# OS関連
+.DS_Store
+Thumbs.db

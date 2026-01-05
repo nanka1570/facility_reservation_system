@@ -1,0 +1,104 @@
+body{
+    background-color: beige;
+}
+table{
+    width: 100%;
+}
+.left{
+    display: block; 
+    max-width: 100%;
+}
+.right{
+    width: 50%;
+}
+.right_bg{
+    
+    
+    background-color: coral;
+    overflow:auto;
+    right: 0%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 1.5em;
+}
+.left_bg{
+    /* width: 55%;
+    height: 200px; */
+    background-color:aqua;
+    overflow: auto;
+   padding: left;
+   
+   border-radius: 10px;
+   box-sizing: border-box;
+   font-size: 1.5em;
+}
+.A{
+    width: 80%;
+    background-color: aqua;
+}
+.U{
+    width: 80%;
+    float: right;
+    background-color: red;
+}
+textarea{
+    left: 0.1%;
+    position: fixed;
+    width: 90%;
+    bottom: 5%; 
+    resize: none;
+    overflow-y: scroll;   
+}
+.sousin{
+    width: 9%;
+    position: fixed;
+    right: 0%;
+    bottom: 5%;
+    float: right;
+    height: 80px;
+    background-color: cyan;
+    border-color: cyan;
+    font-size: 1.5em;
+    font-family: monospace;
+}
+.delete{
+    background-color: red;
+    border-color: red;
+   
+}
+.midasi{
+    font-size: 80px;
+    text-align: center;
+    color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+   
+    
+    
+}
+.buttont{
+    text-align: center;
+}
+
+.button{
+    width: 40%;
+    height: auto;
+    min-height: 100px;
+    font-size: 20px;
+}
+.toptext{
+    text-align: center;
+    font-size: 50px;
+}
+.top{
+    left: 2%;
+    top: 5%;
+    position: fixed;
+    float: left;
+    background-color: chartreuse;
+    width: 13%;
+    height: auto;
+    min-height: 10%;
+    color: midnightblue;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: large;
+}

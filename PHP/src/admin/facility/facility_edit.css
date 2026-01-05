@@ -1,0 +1,41 @@
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-bottom: 20px;
+}
+th, td { 
+    border: 1px solid #ddd; 
+    padding: 10px; 
+    text-align: center; 
+}
+.search-form {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+    align-items: center;
+    flex-wrap: wrap; /* 要素を折り返す */
+}
+
+/* 入力要素のサイズを制限 */
+.search-form input[type="text"],
+.search-form input[type="number"],
+.search-form select {
+    width: 200px; /* 適切な幅に制限 */
+    flex: 0 0 auto; /* 伸縮を防ぐ */
+}
+
+/* ボタンのサイズを固定 */
+button[name="searches_search"],
+button[name="searches_reset"] {
+    width: auto;
+    flex: 0 0 auto;
+    height: 45px;
+    white-space: nowrap; /* テキストの折り返しを防ぐ */
+}
+
+button[name="searches_search"],
+button[name="searches_reset"] {
+    height: 45px;   
+    padding: 0 1.5rem;
+    align-self: stretch;
+}
