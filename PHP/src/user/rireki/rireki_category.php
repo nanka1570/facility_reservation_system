@@ -16,30 +16,39 @@ $_SESSION['pagename']="ホームページ";
 </head>
 <body class="hisbody">
 <?php
-
+$date=$_POST['date'];
+$room=$_POST['room'];
+$cancel=$_POST['cancel'];
+if($room!=null)
+{
+$room_category="Y";
+}else{
+   $room_category="N";
+}
+if($date!=null)
+{
+    $date_category="Y";
+}else{
+   $date_category="N";
+}
 print '<p class="title">絞り込み　</p>';
-
-print '<form style="display:inline" method="post" action="rireki_category.php">';
+print '<form method="post" style="display:inline" action="rireki_category.php">';
 print '<span class="font">部屋名</span>';
-print '<input type="text" class="room_name" name="room" value>';
+print '<input type="text" class="room_name" name="room" value=>';
 
 print '<span class="font">利用日時</span>';
 print '<input type="date" class="nitizi" name="date">';
 
-
-
 print '<select name="cancel">';
 print '<option value="Y">キャンセル済みを表示する</option>';
 print '<option value="N">キャンセル済みを表示しない</option>';
-print '<option value="A">キャンセル済みのみ表示</option>';
-print '</select>';
-
-print '<input type="submit" name="serch" class="button3" value="検索">';
+print '<option value="A">キャンセル済みのみ表示</option></select>';
+print '<input type="submit"  name="reload" class="button3" value="検索">';
 print '</form>';
-
 print '<form style="display:inline" action="rireki.php">';
-print '<input type="submit" name="back" class="button3" value="絞り込みリセット">';
+print '<input type="submit" name="back" class="button3"  value="絞り込みリセット">';
 print '</form>';
+
 print'<table class="histable" align=left width=100% >';
 print'<tr>';
 print'<th class="histh">部屋名</th>';
@@ -49,7 +58,7 @@ print'<th class="histh">終了時間</th>';
 print'<th class="histh">合計金額</th>';
 print'<th class="histh">備考</th>';
 print'<th class="histh">キャンセル状況</th>';
-print "</tr>";
+print"</tr>";
 print '<br/>';
 ?>
 <?php
@@ -69,12 +78,40 @@ try{
             break;
         }
         $can=" ";
+
+        //日時絞り込み
+        if($date_category=="Y"){
+            $time=(string)$rec['start_time_of_use'];
+        if(strpos($time,$date)===false){
+            continue;
+        }
+        }
+
+        //部屋絞り込み
+        if($room_category=="Y"){
+            $room_name=(string)$rec['room_name'];
+        if(strpos($room_name,$room)===false){
+            continue;
+        }
+        }
+
+        //キャンセル済み絞り込み
+        if($cancel=="N"){
+            if($rec['cancel_flag']=="C"){
+            continue;
+            }
+        }elseif($cancel=="A"){
+            if($rec['cancel_flag']!="C"){
+                continue;
+                }
+        }
+        
+
     $start=(string)$rec['start_time_of_use'];
        $start=mb_substr($start,0,16);
        $end=(string)$rec['end_time_of_use'];
        $end=mb_substr($end,0,16);
-
-       if($rec['cancel_flag']=="C"){
+    if($rec['cancel_flag']=="C"){
         $can="キャンセル済み";
     }
     print '<tr>';
@@ -83,11 +120,10 @@ try{
         print '<td class="histd">';print $start; print "</td>"; 
         print '<td class="histd">';print $end;print "</td>"; 
         print '<td class="histd">';print $rec['sum_of_price'];print "</td>";
-        print '<td class="histd">';print $rec['remark'];print "</td>";
+        print '<td class="histd">';print $rec['remark'];print "</td>"; 
         print '<td class="histd">';print $can;print "</td>";   
         print "</tr>";   
     }
-    print '</table>';
 }catch(Exception $e){
     print $e;
     print 'error!';

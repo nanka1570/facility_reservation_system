@@ -16,7 +16,7 @@ include_once "../../common/connect.php";
         $sql="SELECT room_number,room_name FROM facility_table  ";
         $stmt=$dbh->prepare($sql);
         $stmt->execute();
-        print'<form method="post" action="gamenn.php" class=room>';
+
         while(true)
         {
             $text=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -27,14 +27,13 @@ include_once "../../common/connect.php";
             $room_number=$text["room_number"];
             $room_name=$text["room_name"];
             
-            
+            print'<form method="post" action="gamenn.php" class=room>';            
             print'<input type=hidden  name="room_number" value="'.$room_number.'">';
             print'<input type=hidden  name="room_name" value="'.$room_name.'">';
             //$_SESSION['user']=$user_id;   
-            print'<input type="submit" name="selectQ" onclick=""value="'.$text['room_name'].'"class=room_button >';
+            print'<input type="submit" name="selectQ" onclick=""value="'.$text['room_name'].'"class=room_button ></form>';
             
         }
-        ?></form><?php
     }
     catch(Exception $e){
     print $e;

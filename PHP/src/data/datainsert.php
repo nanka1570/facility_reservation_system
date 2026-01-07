@@ -5,7 +5,7 @@ include "connect.php";
 <html>
 <head>
 <meta charset="UTF-8">
-<title>データ挿入</title>
+<title>データ追加</title>
 <link rel="stylesheet" href="table.css">
 <style>
 body{
@@ -25,7 +25,7 @@ input{
 <body>
 <?php
 $table=$_POST['table'];
-print "<p>".$table."テーブルにデータを挿入</p>";
+print "<p>".$table."テーブルにデータを追加</p>";
 print'<form action="tabledata.php">';
 print'<input type="submit" value="戻る">';
 print'</form>';
@@ -39,15 +39,14 @@ switch($table)
         '".$_POST['u_name']."',
         '".$_POST['mail']."',
         '".$_POST['s_ques']."',
-        '".$_POST['s_ans']."',
-        '".$_POST['status']."')";
+        '".$_POST['s_ans']."')";
         $stmt=$conn->prepare($sql);
         $stmt->execute();
     }catch(Exception $e){
         print $e;
         exit;
     }
-    print "user_id".$_POST['userid']."のデータを挿入しました";
+    print "user_id".$_POST['userid']."のデータを追加しました";
         break;
 
     case'reservation':
@@ -79,7 +78,7 @@ switch($table)
         exit;
     }
         break;
-        print "reservation_number".$_POST['reser_num']."のデータを挿入しました";
+        print "reservation_number".$_POST['reser_num']."のデータを追加しました";
         case'history':
             try{
                 $sql="insert history_table values(
@@ -99,7 +98,7 @@ switch($table)
                 exit;
             }
                 break;
-                print "reservation_number".$_POST['reser_num']."のデータを挿入しました";
+                print "reservation_number".$_POST['reser_num']."のデータを追加しました";
 
     case'facility':
     try{
@@ -111,14 +110,15 @@ switch($table)
         '".$_POST['equipment']."',
         '".$_POST['time_unit']."',
         '".$_POST['unit_price']."',
-        '".$_POST['category_num']."')";
+        '".$_POST['category_num']."
+        '".$_POST['time_ex']."')";
         $stmt=$conn->prepare($sql);
         $stmt->execute();
     }catch(Exception $e){
         print $e;
         exit;
     }
-    print "room_number".$_POST['room_num']."のデータを挿入しました";
+    print "room_number".$_POST['room_num']."のデータを追加しました";
         break;
 
     case'category':
@@ -132,7 +132,7 @@ switch($table)
         print $e;
         exit;
     }
-    print "category_number".$_POST['category_num']."のデータを挿入しました";
+    print "category_number".$_POST['category_num']."のデータを追加しました";
         break;
 
     case'inquily':
@@ -149,7 +149,7 @@ switch($table)
         print $e;
         exit;
     }
-    print "serial_number".$_POST['serial']."のデータを挿入しました";
+    print "serial_number".$_POST['serial']."のデータを追加しました";
         break;
 
     case'item':
@@ -165,7 +165,7 @@ switch($table)
         print $e;
         exit;
     }
-    print "item_number".$_POST['item_num']."のデータを挿入しました";
+    print "item_number".$_POST['item_num']."のデータを追加しました";
         break;
 
     case'rental':
@@ -181,7 +181,7 @@ switch($table)
         print $e;
         exit;
     }
-    print "reservation_number".$_POST['reser_num'].",item_number".$_POST['item_num']."のデータを挿入しました";
+    print "reservation_number".$_POST['reser_num'].",item_number".$_POST['item_num']."のデータを追加しました";
         break;
 
     case'extension':
@@ -191,14 +191,15 @@ switch($table)
         '".$_POST['extension']."',
         '".$_POST['rental_f']."',
         '".$_POST['price_f']."',
-        '".$_POST['eq_f']."')";
+        '".$_POST['eq_f']."',
+        '".$_POST['time_f']."')";
         $stmt=$conn->prepare($sql);
         $stmt->execute();
     }catch(Exception $e){
         print $e;
         exit;
     }
-    print "change_extension_date".$_POST['date']."のデータを挿入しました";
+    print "change_extension_date".$_POST['date']."のデータを追加しました";
         break;
     default:
     break;

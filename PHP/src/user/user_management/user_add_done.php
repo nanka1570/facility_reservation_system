@@ -18,32 +18,31 @@ include_once "../../common/sanitize.php";
             $user_name=$_POST['name'];
             $user_Id=$_POST['user_Id'];
             $pass=$_POST['pass'];
-            $pass2=$_POST['pass2'];
+            $p_h=$_POST['p_h'];
             $mail_address=$_POST['mail_address'];
             $secret_question=$_POST["secret_question"];
             $secret_answer=$_POST['secret_answer'];
-            $login='O'; //ログインフラグ
             //var_dump($conn);
             $dbh=$conn;
             $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
             $sql='INSERT INTO user_table(user_Id,password,user_name,
-                mail_address,secret_question,secret_answer,login_status) VALUES (?,?,?,?,?,?,?)';
+                mail_address,secret_question,secret_answer) VALUES (?,?,?,?,?,?)';
             
             $stmt=$dbh->prepare($sql);
             
             $data[]=$user_Id;
-            $data[]=$pass;
+            $data[]=$p_h;
             $data[]=$user_name;
             $data[]=$mail_address;
             $data[]=$secret_question;
             $data[]=$secret_answer;
-            $data[]=$login;
             $stmt->execute($data);
 
             $dbh=null;
+            print '<p class="sucsess">';
             print $user_name;
-            print '<p class="sucsess">さんを登録しました。</p><br/>';
+            print 'さんを登録しました。</p><br/>';
             //print '<a href="user_login.php">ログイン画面へ';
             print '<a class="text" href="../../login/user_login.php">ログイン画面へ</a>';
             //print '<a href="user_add_result.php"></a>';

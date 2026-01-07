@@ -1,5 +1,5 @@
 <?php
-include_once "../common/DB_switch.php";
+include_once "common/session.php";
 ?>
 <?php       //前画面から受け取った内容を保持　　※次画面へ引き継ぎたい場合はsession等に値を入れなおす
 if(isset($_POST['disp'])==true){

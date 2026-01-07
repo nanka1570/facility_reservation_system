@@ -1,7 +1,7 @@
 <?php
 //include_once "common/connect.php";       //DB接続用コード
 //include_once "common/session.php";
-include_once "../common/DB_switch.php";
+include_once "../common/connect.php";
 include_once "../common/session.php";
 ?>
 <!DOCTYPE html>

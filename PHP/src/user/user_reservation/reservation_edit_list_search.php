@@ -6,6 +6,7 @@ include_once "../../common/session.php";
 <html> 
 <head> 
 <meta charset="UTF-8"> 
+<link rel="stylesheet" href="../../common/user_basic.css">
 <link rel="stylesheet" href="reservation.css"> 
 <title></title> 
 </head> 
@@ -63,21 +64,21 @@ include_once "../../common/session.php";
             if($new_answer_date==1){
                 print'<p class="check">予約がありません</p>';
                 print '<form>';
-                    print '<p class="buttons"><input type="button" class="button" onclick=location.href="reservation_edit_list.php" value="予約検索画面に戻る"></p>';
+                    print '<p class="buttons"><input type="button" class="color" onclick=location.href="reservation_edit_list.php" value="予約検索画面に戻る"></p>';
                 print '</form>';
             }    
             else{
             print '<form action="reservation_edit_check.php" method="post">'; 
                 print'<table>';
                     print'<tr>';
-                        print'<th scope="col"></th>';
-                        print'<th scope="col">ユーザーID</th>';
-                        print'<th scope="col">部屋名</th>';
-                        print'<th scope="col">使用人数</th>';
-                        print'<th scope="col">利用開始日時</th>';
-                        print'<th scope="col">利用終了日時</th>';
-                        print'<th scope="col">合計料金</th>';
-                        print'<th scope="col">備考欄</th>';
+                        print'<th scope="col" class="th_color"></th>';
+                        print'<th scope="col" class="th_color">ユーザーID</th>';
+                        print'<th scope="col" class="th_color">部屋名</th>';
+                        print'<th scope="col" class="th_color">使用人数</th>';
+                        print'<th scope="col" class="th_color">利用開始日時</th>';
+                        print'<th scope="col" class="th_color">利用終了日時</th>';
+                        print'<th scope="col" class="th_color">合計料金</th>';
+                        print'<th scope="col" class="th_color">備考欄</th>';
                     print'</tr>';
                 $stmt -> execute();
                 while(true){
@@ -116,18 +117,19 @@ include_once "../../common/session.php";
                 $stmt = null;
                 $stmt2 = null;
                 print'</table>';print'<br>'; 
-                print'<p class="buttons"><input type="submit" class="button" value="選択した予約を変更する"></p>';
+                print'<p class="buttons"><input type="submit" class="color" value="選択した予約を変更する"></p>';
             print'</form>';
 
             print '<form>';
-                print '<p class="buttons"><input type="button" class="button" onclick=location.href="reservation_edit_list.php" value="予約一覧に戻る"></p>';
+                print '<p class="buttons"><input type="button" class="color" onclick=location.href="reservation_edit_list.php" value="予約一覧に戻る"></p>';
             print '</form>';
 
             print '<form>';
-                print '<p class="buttons"><input type="button" class="button" onclick=location.href="../../login/user_home.php" value="ホーム画面に戻る"></P>';
+                print '<p class="buttons"><input type="button" class="color" onclick=location.href="../../login/user_home.php" value="ホーム画面に戻る"></P>';
             print '</form>';
 
             }
     ?>
 </body>
+<script src="../../common/ebi.js"></script>
 </html>

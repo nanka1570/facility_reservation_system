@@ -17,27 +17,31 @@ if(isset($_POST['name']))
     </head>
     <body>
     </br>
+    <table>
     <form action="user_add_check.php" METHOD=POST>
-            <p class="text">氏名　　　　　　　　　　　　姓<input type="text" name="name1" value>
-</br>　　　　　　　　　　　　　　名<input type="text" name="name2" value></p>
+        <table class="sort"><tr>
+            <th>氏名</th><td>姓</td><td><input type="text" name="name1" value></td><br>
+            <td>名</td><td><input type="text" name="name2" value></td></tr>
 
-            <p class="text">フリガナ　　　　　　　　　セイ<input type="text" name="name3"></br> 　　　　　　　　　　　　　メイ<input type="text" name="name4"></p>
+            <tr>
+            <th>フリガナ<td>セイ</td><td><input type="text" name="name3"></td><td>メイ</td><td><input type="text" name="name4"></td>
+            </tr>
+            <tr><th>ユーザーID</th><td></td>
+            <td><input type="text" name="userId" value></td></tr>
+            <tr><th>パスワード</th><td></td>
+            <td><input type="password" name="pass" value></td></tr>
+            <tr><th>パスワード(確認用)</th><td></td>
+            <td><input type="password" name="pass2" value></td></tr>
+            <tr><th>メールアドレス</th><td></td>
+            <td><input type="text" name="mail_address" value></td></tr>
 
-            <p class="text">ユーザーID　　　　　　 　　　
-            <input type="text" name="userId" value></p>
-            <p class="text">パスワード　　　　　　 　 　　
-            <input type="password" name="pass" value></p>
-            <p class="text">パスワード（確認用）　 　 　　
-            <input type="password" name="pass2" value></p>
-            <p class="text">メールアドレス　　　 　 　　　
-            <input type="text" name="mail_address" value></p>
-
-            <p class="text">秘密の質問  　  　　　 　　  　 　　　　　　質問
-            <select name='question'>
+            <tr><th>秘密の質問<td>質問</td>
+            <td>
+            <select name='question' class="ques">
                 <option value="1">質問A</option>
                 <option value="2">質問B</option>
                 <option value="3">質問C</option>
-            </select></p>
+            </select></td></tr>
             <?php
             if(isset($_POST["question"]))
             {
@@ -46,11 +50,11 @@ if(isset($_POST['name']))
                 //echo $secret_quistion;
             }
             ?>
-            <p class="text">回答　　　　　　　 　　  　　　<input type="text" name=secret_answer value></p>
+            <tr><th>回答</th><td></td><td><input type="text" name=secret_answer value></td></tr></table>
 
-            <p class="logtext"><input type="button" onclick="history.back()" value="戻る">
-            <input type="submit" name=entry  value="登録"></p>
-            
+            <p class="logtext"><input type="button" class="button" onclick="location.href='../../login/user_login.php'" value="戻る">
+            <input type="submit" class="button" name=entry  value="登録"></p>
+        </table>
         </form>
     </body>
 </html>

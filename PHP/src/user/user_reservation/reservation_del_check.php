@@ -7,7 +7,8 @@ include_once "../../common/session.php";
 <!DOCTYPE html> 
 <html> 
 <head> 
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../common/user_basic.css"> 
 <link rel="stylesheet" href="reservation.css"> 
 <title></title> 
 </head> 
@@ -17,7 +18,7 @@ include_once "../../common/session.php";
         print '<br><br><br><br>';
         print'<p class="check">予約が選択されていません</p>';
         print'<form action="reservation_del_list.php">';
-        print'<p class="buttons"><input type="submit" class="button" value="予約一覧画面に戻る"></p>';
+        print'<p class="buttons"><input type="submit" class="color" value="予約一覧画面に戻る"></p>';
         print'</form>';
     }else{
         $reservation_number = $_POST['selected_reservation_number'];
@@ -47,11 +48,11 @@ include_once "../../common/session.php";
             print'<p class="check">備考欄：'.$reservation_data['remark'].'</p>';
         }
         print'<form action="reservation_del_list.php">';
-            print'<p class="buttons"><input type="submit" class="button" value="予約一覧画面に戻る"></p>';
+            print'<p class="buttons"><input type="submit" class="color" value="予約一覧画面に戻る"></p>';
         print'</form>';
         print'<form method="post" action="reservation_del_done.php">';
             print'<input type="hidden" name="reservation_number" value="'.$reservation_number.'">';
-            print'<p class="buttons"><input type="submit" class="button" value="予約をキャンセルする"></p>';
+            print'<p class="buttons"><input type="submit" class="color" value="予約をキャンセルする"></p>';
         print'</form>';
     }
     ?>

@@ -141,7 +141,7 @@ for($n=$start_dateH+$d_u;$n<$dateH+(24-$start_dateH)*(60/$unit_time);$n++){//時
                             print'<input type="hidden" name="start" value='."{$start_time}";print'>';
                             print'<input type="hidden" name="user_id" value="'.$_POST['user_id'].'">';//
                             print'<input type="hidden" name="reservation_number" value="'.$reservation_number.'">';//
-                            print'<input type="submit" value="時間変更">';
+                            print'<input type="submit" class="reserv-button" value="時間変更">';
                         print'</form>';
                     print "</td>";
                 }
@@ -161,7 +161,7 @@ for($n=$start_dateH+$d_u;$n<$dateH+(24-$start_dateH)*(60/$unit_time);$n++){//時
                             print'<input type="hidden" name="user_id" value="'.$_POST['user_id'].'">';//
                             print'<input type="hidden" name="reservation_number" value="'.$reservation_number.'">';//
                             //print $start_time;
-                            print'<input type="submit" value="時間変更">';
+                            print'<input type="submit" class="reserv-button" value="時間変更">';
                         print'</form>';
                     print "</td>";
                 }
@@ -277,7 +277,6 @@ print '</section>';
         print'<input name="date" type="date" min="'.$dateToday; print'"/>';
         print'<input type="submit" class="button_css" value="別の日付へ">';
         print'</form>';
-        print'<p>予約変更を中止する</p>';
         print'<form method="post" action="admin_reservation_edit_stop.php">';//
             print'<input type="hidden" name="reservation_number" value="'.$reservation_number.'">';//
             print'<input type="submit" class="button_css" value="予約変更を中止する">';//

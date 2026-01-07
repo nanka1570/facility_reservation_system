@@ -7,6 +7,7 @@ include_once "../../common/session.php";
     <head>
         <meta charset="utf-8">
         <title></title>
+        <link rel="stylesheet" href="../../common/user_basic.css">
         <link rel="stylesheet" href="reservation.css">
         <meta name="" content="">
     </head>
@@ -51,6 +52,7 @@ include_once "../../common/session.php";
                 //print"<br>";
             }
 
+            $item_pieces_data_cnt = count($item_pieces_data);///////////////////////////////---------------------
 
             //貸し出し備品がある場合、備品名から番号を取得
             if($item_names!=null){
@@ -150,6 +152,7 @@ include_once "../../common/session.php";
             ////////////////////////////////////////////////////////////////
             $check_numeric = "true";
             $check_max_people = "true";
+            $check_item_cnt = "true";//--------------------------------------------------------
             $check_item_max = "true";
             $check_time = "true";
             ////////////////////////////////////////////////////////////////
@@ -158,10 +161,10 @@ include_once "../../common/session.php";
                 print'<p class="check">予約人数を半角数字で入力してください。</p>';
                 print'<form method="post" action="reservation_add_01.php">';
                     print'<input type="hidden" name="room_ctg" value="'.$room_ctg.'">';
-                    print'<p class="buttons"><input type="submit" class="button" value="予約画面に戻る"></p>';
+                    print'<p class="buttons"><input type="submit" class="color" value="予約画面に戻る"></p>';
                 print'</form>';
                 print'<form method="post" action="../../login/user_home.php">';
-                    print'<p class="buttons"><input type="submit" class="button value="ホーム画面に戻る"></p>';
+                    print'<p class="buttons"><input type="submit" class="color" value="ホーム画面に戻る"></p>';
                 print'</form>';
                 $check_numeric = "false";
             }
@@ -171,16 +174,33 @@ include_once "../../common/session.php";
                     print'<p class="check">予約人数が適切ではありません。</p>';
                     print'<form method="post" action="reservation_add_01.php">';
                         print'<input type="hidden" name="room_ctg" value="'.$room_ctg.'">';
-                        print'<p class="buttons"><input type="submit" class="button" value="予約画面に戻る"></p>';
+                        print'<p class="buttons"><input type="submit" class="color" value="予約画面に戻る"></p>';
                     print'</form>';
                     print'<form method="post" action="../../login/user_home.php">';
-                        print'<p class="buttons"><input type="submit" class="button" value="ホーム画面に戻る"></p>s';
+                        print'<p class="buttons"><input type="submit" class="color" value="ホーム画面に戻る"></p>';
                     print'</form>';
                    $check_max_people = "false"; 
                 }
             }
-            ////////////////////////////////////////////////////////////////^^^^^^^^^^^^^^^^^^^^^^            
+
+            //////////////////////////////////////////////////////////////////////////////////////------------
             if($check_numeric == "true" && $check_max_people == "true"){
+                if($item_cnt != $item_pieces_data_cnt){
+                    print'<p class="check">備品の選択が間違えています。</p>';
+                    print'<form method="post" action="reservation_add_01.php">';
+                        print'<input type="hidden" name="room_ctg" value="'.$room_ctg.'">';
+                        print'<p class="buttons"><input type="submit" class="color" value="予約画面に戻る"></p>';
+                    print'</form>';
+                    print'<form method="post" action="../../login/user_home.php">';
+                        print'<p class="buttons"><input type="submit" class="color" value="ホーム画面に戻る"></p>';
+                    print'</form>';
+                    $check_item_cnt = "false";
+                }
+            }
+
+            //////////////////////////////////////////////////////////////////////////////////////------------
+            ////////////////////////////////////////////////////////////////^^^^^^^^^^^^^^^^^^^^^^            
+            if($check_numeric == "true" && $check_max_people == "true" && $check_item_cnt == "true"){
                 $reserve_num = 0;
                 //$item_name_data//名前
                 //$item_pieces_data//数
@@ -212,32 +232,32 @@ include_once "../../common/session.php";
                     print '</p>';
                     print'<form method="post" action="reservation_add_01.php">';
                         print'<input type="hidden" name="room_ctg" value="'.$room_ctg.'">';
-                        print'<p class="buttons"><input type="submit" class="button" value="予約画面に戻る"></p>';
+                        print'<p class="buttons"><input type="submit" class="color" value="予約画面に戻る"></p>';
                     print'</form>';
                     print'<form method="post" action="../../login/user_home.php">';
-                        print'<p class="buttons"><input type="submit" class="button" value="ホーム画面に戻る"></p>';
+                        print'<p class="buttons"><input type="submit" class="color" value="ホーム画面に戻る"></p>';
                     print'</form>';
                     $check_item_max = "false";
                 }
                 ///////////////////////////////////////////////////////////////////////////^^^^^^^^^^^
             }
             ////////////////////////////////////////////////////////////////
-            if($check_numeric == "true" && $check_max_people == "true" && $check_item_max == "true"){
+            if($check_numeric == "true" && $check_max_people == "true" && $check_item_cnt == "true" && $check_item_max == "true"){
                 if($r_starttime >= $r_endtime){
                     print '<br><br><br><br>';
                     print'<p class="check">予約時間が適切ではありません。</p>';
                     print'<form method="post" action="reservation_add_01.php">';
                         print'<input type="hidden" name="room_ctg" value="'.$room_ctg.'">';
-                        print'<p class="buttons"><input type="submit" class="button" value="予約画面に戻る"></p>';
+                        print'<p class="buttons"><input type="submit" class="color" value="予約画面に戻る"></p>';
                     print'</form>';
                     print'<form method="post" action="../../login/user_home.php">';
-                        print'<p class="buttons"><input type="submit" class="button" value="ホーム画面に戻る"></p>';
+                        print'<p class="buttons"><input type="submit" class="color" value="ホーム画面に戻る"></p>';
                     print'</form>';
                     $check_time = "false";
                 }
             }
             ////////////////////////////////////////////////////////////////
-            if($check_numeric == "true" && $check_max_people == "true" && $check_item_max == "true" && $check_time == "true"){
+            if($check_numeric == "true" && $check_max_people == "true" && $check_item_cnt == "true" && $check_item_max == "true" && $check_time == "true"){
                 print '<br><br><br><br>';           
                 $sql="SELECT reservation_number
                     FROM reservation_table
@@ -265,10 +285,10 @@ include_once "../../common/session.php";
                     print '<p class="check">指定された時間帯は既に予約されています。</p>';
                     print'<form method="post" action="reservation_add_01.php">';
                         print'<input type="hidden" name="room_ctg" value="'.$room_ctg.'">';
-                        print'<p class="buttons"><input type="submit" class="button" value="予約画面に戻る"></p>';
+                        print'<p class="buttons"><input type="submit" class="color" value="予約画面に戻る"></p>';
                     print'</form>';
                     print'<form method="post" action="../../login/user_home.php">';
-                        print'<p class="buttons"><input type="submit" class="button" value="ホーム画面に戻る"></p>';
+                        print'<p class="buttons"><input type="submit" class="color" value="ホーム画面に戻る"></p>';
                     print'</form>';
                     //echo $e->get_message();
                 }
@@ -291,9 +311,10 @@ include_once "../../common/session.php";
                                     room_number,
                                     number_of_user,
                                     start_time_of_use, 
-                                    end_time_of_use
+                                    end_time_of_use,
+                                    cancel_flag
                                     )
-                            VALUES (?,?,?,?,?,?)";//             
+                            VALUES (?,?,?,?,?,?,?)";//             
                     $stmt = $dbh->prepare($sql_tentative);
                     $stmt->execute([
                         $reservation_number,//
@@ -303,7 +324,8 @@ include_once "../../common/session.php";
                         /*$r_starttime,
                         $r_endtime*/
                         $r_starttime->format('Y-m-d H:i'),
-                        $r_endtime->format('Y-m-d H:i')
+                        $r_endtime->format('Y-m-d H:i'),
+                        ''
                     ]);
 
 
@@ -477,16 +499,17 @@ else{
 }
                             }
                             else{
+                                print'<input type="hidden" name="price_ex" value=" ">';
                                 print'<input type="hidden" name="not_rental" value="true">';
                             }
                             ?>
 
-                            <p class="buttons"><button type="submit" class="button" name="action" value="Yes">はい</button></p>
+                            <p class="buttons"><button type="submit" class="color" name="action" value="Yes">はい</button></p>
                             </form>
                             <?php
                             print'<form method="post" action="reservation_add_stop.php">';
                                 print'<input type="hidden" name="reservation_number" value="'.$reservation_number.'">';
-                                print'<p class="buttons"><input type="submit" class="button" value="いいえ"></p>';
+                                print'<p class="buttons"><input type="submit" class="color" value="いいえ"></p>';
                             print'</form>';
                     }
                     else

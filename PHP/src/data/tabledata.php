@@ -19,7 +19,6 @@ include "connect.php";
     print '<input type="text" name="mail" placeholder="mail" >';
     print '<input type="text" name="s_ques" placeholder="question(1~5)" >';
     print '<input type="text" name="s_ans" placeholder="answer" >';
-    print '<input type="text" name="status" placeholder="login(I or O)" >';
     print '<input type="hidden" name="table" value="user">';
     print '<input type="submit" onclick="location.href=datainsert.php" value ="追加"></form>';
 
@@ -32,7 +31,6 @@ include "connect.php";
     print"<th>mail_address</th>";
     print"<th>secret_question</th>";
     print"<th>secret_answer</th>";
-    print"<th>login_status</th>";
     print"</tr>";
 try{
     $sql="select * from user_table";
@@ -54,8 +52,7 @@ try{
         print "<td>";print $rec['user_name'];print "</td>";
         print "<td>";print $rec['mail_address'];print "</td>";
         print "<td>";print $rec['secret_question'];print "</td>";
-        print "<td>";print $rec['secret_answer'];print "</td>";
-        print "<td>";print $rec['login_status'];print "</td></form>";
+        print "<td>";print $rec['secret_answer'];print "</td></form>";
         print "</tr>";
     }
 }
@@ -129,22 +126,8 @@ print "</table>";
 
 print"<p class=table-name style='color:gray;'>予約履歴テーブル</p>";
 
-// print '<form action="datainsert.php" method="post">';
-// print '<input type="text" name="reser_num" placeholder="reservation_num" >';
-// print '<input type="text" name="id" placeholder="id" >';
-// print '<input type="text" name="room_name" placeholder="room_name" >';
-// print '<input type="text" name="num_user" placeholder="number_of_user" >';
-// print '<input type="text" name="start" value="2025-00-00 00:00" >';
-// print '<input type="text" name="end" value="2025-00-00 00:00" >';
-// print '<input type="text" name="can_f" placeholder="cancel" >';
-// print '<input type="text" name="sum_p" placeholder="sum_of_price" >';
-// print '<input type="text" name="remark" placeholder="remark" >';
-// print '<input type="hidden" name="table" value="history">';
-// print '<input type="submit" onclick="location.href=datainsert.php" value ="追加"></form>';
-
 print"<table>";
 print"<tr>";
-print"<th></th>";
 print"<th>reservation_number</th>";
 print"<th>user_id</th>";
 print"<th>room_name</th>";
@@ -169,7 +152,6 @@ while(true)
     print '<form action="datadelete.php" method="post">';
     print '<input type="hidden" name="table_d" value="history">';
     print '<input type="hidden" name="resnum" value="'.$rec['reservation_number'].'">'; 
-    print '<td><input type="submit" onclick="location.href=datadelete.php" value="消去"></td>';
     print "<td>";print $rec['reservation_number'];print "</td>";
     print "<td>";print $rec['user_id'];print "</td>";
     print "<td>";print $rec['room_name'];print "</td>";
@@ -199,6 +181,7 @@ print '<input type="text" name="equipment" placeholder="equipment" >';
 print '<input type="text" name="time_unit" placeholder="time_unit" >';
 print '<input type="text" name="unit_price" placeholder="unit_price" >';
 print '<input type="text" name="category_num" placeholder="category_num" >';
+print '<input type="text" name="time_ex" placeholder="time_extension" >';
 print '<input type="hidden" name="table" value="facility">';
 print '<input type="submit" onclick="location.href=datainsert.php" value ="追加"></form>';
 
@@ -213,6 +196,7 @@ print"<th>equipment</th>";
 print"<th>time_of_unit</th>";
 print"<th>time_of_unit_price</th>";
 print"<th>category_number</th>";
+print"<th>time_extension</th>";
 print"</tr>";
 try{
 $sql="select * from facility_table";
@@ -237,6 +221,7 @@ while(true)
     print "<td>";print $rec['time_of_unit'];print "</td>";
     print "<td>";print $rec['time_of_unit_price'];print "</td>";
     print "<td>";print $rec['category_number'];print "</td></form>";
+    print "<td>";print $rec['time_extension'];print "</td></form>";
     print "</tr>";
 }
 }
@@ -437,6 +422,7 @@ print '<input type="text" name="extension" placeholder="Y or N" >';
 print '<input type="text" name="rental_f" value="R" >';
 print '<input type="text" name="price_f" value="P" >';
 print '<input type="text" name="eq_f" value="E" >';
+print '<input type="text" name="time_f" value="T" >';
 print '<input type="hidden" name="table" value="extension">';
 print '<input type="submit" onclick="location.href=datainsert.php" value ="追加"></form>';
 
@@ -448,6 +434,7 @@ print"<th>use_extension</th>";
 print"<th>rental_flag</th>";
 print"<th>price_flag</th>";
 print"<th>equipment_flag</th>";
+print"<th>time_extension_flag</th>";
 print"</tr>";
 try{
 $sql="select * from extension_table";
@@ -469,7 +456,8 @@ while(true)
     print "<td>";print $rec['use_extension'];print "</td>";
     print "<td>";print $rec['rental_flag'];print "</td>";
     print "<td>";print $rec['price_flag'];print "</td>";
-    print "<td>";print $rec['equipment_flag'];print "</td></form>";
+    print "<td>";print $rec['equipment_flag'];print "</td>";
+    print "<td>";print $rec['time_extension_flag'];print "</td></form>";
 }
 }
 catch(Exception $e){

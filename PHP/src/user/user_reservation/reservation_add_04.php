@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>予約表示</title>
+<link rel="stylesheet" href="../../common/user_basic.css">
 <link rel="stylesheet" href="reservation.css">
 </head>
 <body>
@@ -33,13 +34,14 @@ $unit_time=30;//時間単位(施設テーブルのtime_of_unit)1分=1
 ?>
 <?php
 if($dateToday == $reserveDate || $reserveDate==""){
-    include_once "user_reservation_add_01.php";
+    include_once "reservation_add_01.php";
 }
 else{
     include_once "../../common/connect.php";
     include_once "../../common/session.php";
+    print'<p class="day_font">';
     print $reserveDate;
-    print "<br>";
+    print "</p>";
 
 ?>
     <table>
@@ -50,7 +52,7 @@ else{
                 include "room_count.php";//部屋名と部屋の数を取得
                 //$room_cnt = 1;
                 for($i = 0; $i < $room_cnt; $i++){
-                    print'<th scope="col">';print"{$room_name[$i]}";//部屋名表記
+                    print'<th scope="col" class="th_color">';print"{$room_name[$i]}";//部屋名表記
                     //print $room_name[$i];
                     print'</th>';
                 }
@@ -66,7 +68,7 @@ else{
             $tablei_r= sprintf('%02d',(($n+1)*$unit_time)%60);//:ii
             print"<tr>";
                 //if($tableh_l<=$start_dateH){   
-                print"<th>";
+                print'<th class="td_color">';
                     //時間表示の左側
                     print $tableh_l.":".$tablei_l."~";
                     $tbleft=$tableh_l.$tablei_l;
@@ -146,7 +148,7 @@ else{
                                 print'<input type="hidden" name="start" value='."{$start_time}";print'>';
                                 print'<input type="hidden" name="date" value='."{$reserveDate}";print'>';
                                 print '<class="buttoncolor">';
-                                print'<input type="submit" class="buttoncolor" value="〇">';
+                                print'<input type="submit" class="buttoncolor" value="予約">';
                                 print '</buttoncolor>';
                             print'</form>';
                         print "</td>";
@@ -166,7 +168,7 @@ else{
                                 print'<input type="hidden" name="start" value='."{$start_time}";print'>';
                                 print'<input type="hidden" name="date" value='."{$reserveDate}";print'>';
                                 print '<class="buttoncolor">';
-                                print'<input type="submit" class="buttoncolor" value="〇">';
+                                print'<input type="submit" class="buttoncolor" value="予約">';
                                 print '</buttoncolor>';
                             print'</form>';
                         print "</td>";
@@ -176,7 +178,7 @@ else{
             }//for終了
             print "</tr>";   
         }
-}
+
 ?>
     </table>
 <?php
@@ -260,7 +262,7 @@ else{
         print'<input type="hidden" name="item_cnt" value="'.$i.'">';
     print'<p class="font">備考欄</p>';
         print'<p><input type="text" class="bikou" name="remark"></p>';
-        print'<p><input type="submit" class="button" value="予約確認画面へ"></p>';
+        print'<p><input type="submit" class="color" value="予約確認画面へ"></p>';
            
     print'</form>';
 
@@ -268,18 +270,19 @@ else{
     print'<form name="form1" method="post" action="reservation_add_02.php">';
         print'<input type="hidden" name="room_ctg" value='."{$room_num}";print'>';
         print'<input name="date" class="font" type="date" min="'.$dateToday; print'"/>';
-        print'<input type="submit" class="button" value="別の日付へ">';
+        print'<input type="submit" class="color" value="別の日付へ">';
         print'</form>';
 
         print'<p class="font">部屋選択画面に戻る</p>';
         print'<form action="room.php">';
-            print'<input type="submit" class="button" value="部屋選択画面に戻る">';
+            print'<input type="submit" class="color" value="部屋選択画面に戻る">';
         print'</form>';
 
         print'<p class="font">ホーム画面に戻る</p>';
         print'<form action="../../login/user_home.php">';
-            print'<input type="submit" class="button" value="ホーム画面に戻る">';
+            print'<input type="submit" class="color" value="ホーム画面に戻る">';
     print'</form>';
+}
 ?>
 </body>
 </html>

@@ -171,16 +171,3 @@ body {
         font-size: 1.5rem;
     }
 }
-
-/* .extension-toggle{
-    cursor: pointer;
-} */
-
-/* 拡張機能に👆ってなるやつ追加 */
-input[type="checkbox"]{
-    cursor: pointer;
-}
-
-label{
-    cursor: pointer;
-}

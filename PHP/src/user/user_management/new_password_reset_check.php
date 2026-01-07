@@ -36,7 +36,8 @@ include_once "../../common/sanitize.php";
         print '<p class=top>この内容で登録しますか？</p>';
         print '<form method="POST" action="new_password_reset_done.php"><p class=text>';
         print '<input type="hidden" name="user_Id" value="'.$user_Id.'">';
-        print '<input type="hidden" name="pass" value="'.$pass.'">ID　　　';
+        $p_h=password_hash($_POST['pass'],PASSWORD_DEFAULT); //0203
+        print '<input type="hidden" name="pass" value="'.$p_h.'">ID　　　';
         echo $user_Id;
         echo '<br>pass　　　';
         echo $pass;

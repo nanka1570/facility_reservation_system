@@ -161,6 +161,7 @@ catch(Exception $e){
 </table>
 <br><br><br><br><br><br><br id="bottom">
 <form action="controlq_kanri.php" method="post">
+<input class="update" type="submit" onclick="return confirm_test()" name="update" value ="更新">
 <textarea rows="10" name="hensin" font-size="40px" placeholder="<?php print $ID;?>に返信" ></textarea>
 <?php
 print '<input type="hidden" name="ID" value="'.$ID.'">';

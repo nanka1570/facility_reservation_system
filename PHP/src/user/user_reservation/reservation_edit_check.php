@@ -7,6 +7,7 @@ include_once "../../common/session.php";
 <html> 
 <head> 
 <meta charset="UTF-8"> 
+<link rel="stylesheet" href="../../common/user_basic.css">
 <link rel="stylesheet" href="reservation.css"> 
 <title></title> 
 </head> 
@@ -16,7 +17,7 @@ include_once "../../common/session.php";
         print '<br><br><br><br>';
         print'<p class="check">予約が選択されていません</p>';
         print'<form action="reservation_edit_list.php">';
-        print'<p class="buttons"><input type="submit" class="button" value="予約一覧画面に戻る"></p>';
+        print'<p class="buttons"><input type="submit" class="color" value="予約一覧画面に戻る"></p>';
         print'</form>';
     }
     else{
@@ -84,7 +85,7 @@ include_once "../../common/session.php";
             //print'<input type="hidden" name="user_id" value="'.$reservation_data['user_Id'].'">';
             print'<input type="hidden" name="user_id" value="'.$reservation_data['user_id'].'">';//学校用
             //print'<input type="hidden" name="start_time_of_use" value="'.$reservation_data['start_time_of_use'].'">';
-            print'<p class="buttons"><input type="submit" class="button" value="変更する"></p>';
+            print'<p class="buttons"><input type="submit" class="color" value="変更する"></p>';
         print'</form>';
         }
         else{
@@ -95,13 +96,13 @@ include_once "../../common/session.php";
             print'<input type="hidden" name="date" value="'.$edit_reservation_date.'">';
             print'<input type="hidden" name="user_id" value="'.$reservation_data['user_id'].'">';//学校用
             //print'<input type="hidden" name="start_time_of_use" value="'.$reservation_data['start_time_of_use'].'">';
-            print'<p class="buttons"><input type="submit" class="button" value="変更する"></p>';
+            print'<p class="buttons"><input type="submit" class="color" value="変更する"></p>';
         print'</form>';            
         }
 
         print'<form method="post" action="reservation_edit_stop.php">';//
             print'<input type="hidden" name="reservation_number" value="'.$reservation_number.'">';//
-            print'<p class="buttons"><input type="submit" class="button" value="予約変更を中止する"></p>';//
+            print'<p class="buttons"><input type="submit" class="color" value="予約変更を中止する"></p>';//
         print'</form>';
     }
     ?>

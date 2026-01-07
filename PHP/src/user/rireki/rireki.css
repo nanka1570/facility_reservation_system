@@ -28,7 +28,7 @@
 .font{
     font-size: 25px;
     color: black;
-    margin-left: 50px;
+    margin-left: 20px;
 }
 .right{
     text-align: center;
@@ -39,6 +39,7 @@
     text-align: center;
     font-size: 20px;
     margin-left: 50px;
+    
 }
 .date{
     width: 8em;
@@ -54,12 +55,37 @@
 .button2{
     width: auto;
     height:auto;
-    font-size: 25px; 
-    left: 50em;
-    margin-left: 50px;
-    float: left;
+    font-size: 17px;
+    
 }
 .title{
     text-align: center;
     font-size: 30px;
+}
+input[type="submit"].button3{
+    background-color: #4db4b4;
+    margin-left: 20px;
+    width: auto;
+    height: 50px;
+    overflow: hidden;
+   
+}
+.nitizi{
+    width:100px;
+    height: 40px;
+    margin-left: 20px;
+}
+input[type="text"].room_name{
+    width: 200px;
+    height: 40px;
+    margin-left: 20px;
+}
+select{
+    width: 260px;
+    height: 60px;
+    margin-left: 20px;
+}
+.text{
+    font-size: 18px;
+    margin-left: 20px;
 }

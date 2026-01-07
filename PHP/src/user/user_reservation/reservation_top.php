@@ -33,6 +33,12 @@ $_SESSION['pagename']="ホームページ";
     <input type="submit" class="top-button" value="予 約 の 削 除">
     </form>
 </td>
+
+<td>
+    <form action="reserv_extension_list.php" method="$_POST">
+        <input type="submit" class="top-button" value="予 約 時 間 の 延 長">
+    </form>
+</td>
 </tr>
 </table>
 <br/>  

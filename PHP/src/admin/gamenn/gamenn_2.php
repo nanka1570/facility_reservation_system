@@ -6,19 +6,19 @@
 <title>画面表示</title>
 </head>
 <body>
-<form method="post" action="gamennseni.php">
+<form method="post" action="gamennitiran.php">
 <button>
 <?php
 include_once "../../common/connect.php";
 include_once "../../common/session.php";
 
-$datenow="2025-11-12 21:30";//date('Y-m-d H:i');
-$compMonthDate="20251112";// date("Ymd");//比較用年月日
-$dateH = 21;//date("H");//現在時刻(時間)
-$datei = 30;//date("i");//現在時刻(分)
-$dateToday ="2025-11-12";// date("Y-m-d");
+$datenow=date('Y-m-d H:i');
+$compMonthDate= date("YmdHi");//比較用年月日
+$dateH = date("H");//現在時刻(時間)
+$datei = date("i");//現在時刻(分)
+$dateToday = date("Y-m-d");
 $newDateTime=new Datetime($datenow);
-$dT="2025-11-12 21:30";//$newDateTime->format("Y-m-d H:i");
+$dT=$newDateTime->format("Y-m-d H:i");
 $dateTodaynext=$newDateTime->modify("+6 hour");
 $dTnext=$dateTodaynext->format("Y-m-d H:i");
 $tdnum = array(array(),array());//$tdnum宣言
@@ -99,18 +99,19 @@ print '<p class="time">現在時刻：'.$datenow.'</p>';
     </tr>
 
 <?php
+$d_u=floor($datei/$unit_time);
 $k=0;
 for($n=$dateH;$n<$dateH+6*(60/$unit_time);$n++){//時間単位に合わせた6時間の表を生成
     $j=$n;
     if($j>25){
         $j=$j-24;
     }
-    $tableh_l= sprintf('%02d',$j-floor($k/(60/$unit_time)));//hh:
-    $tablei_l= sprintf('%02d',($j*$unit_time)%60);//:ii~
-    $tableh_r= sprintf('%02d',($j+1)-floor(($k+1)/(60/$unit_time)));//~hh:
-    $tablei_r= sprintf('%02d',(($j+1)*$unit_time)%60);//:ii
+    $tableh_l= sprintf('%02d',$n-floor(($k+$d_u)/(60/$unit_time)));//hh:
+    $tablei_l= sprintf('%02d',($d_u+1+($k%2))*$unit_time%60);//:ii~
+    $tableh_r= sprintf('%02d',$n+1-floor(($k+$d_u+1)/(60/$unit_time)));//~hh:
+    $tablei_r= sprintf('%02d',($d_u+($k%2))*$unit_time%60);//:ii
     print"<tr>"; 
-            print"<th class=retime>";
+            print"<th class='retime' style='font-size:40px;'>";
                 //時間表示の左側
                 print $tableh_l.":".$tablei_l."~";
                 $tbleft=$tableh_l.$tablei_l;
@@ -149,14 +150,14 @@ for($n=$dateH;$n<$dateH+6*(60/$unit_time);$n++){//時間単位に合わせた6�
             }
             $rnum[]=$data['reservation_number'];
             $pickstYmd=new DateTime($data["start_time_of_use"]);//利用開始年月日
-            $compstYmd=$pickstYmd->format('Ymd');
+            $compstYmd=$pickstYmd->format('YmdHi');
             $pickendYmd=new DateTime($data["end_time_of_use"]);//利用終了年月日
             $compendYmd=$pickendYmd->format('Ymd');
 
             $pickstou=new DateTime($data["start_time_of_use"]);//$stou=利用開始時間
             //$stou[]=$pickstou->format('Hi');
             //日付を跨ぐ予約があるかの判定
-            if($compMonthDate==$compstYmd){//予約を跨がない予約(利用開始年月日が選択した日付と異なる)
+            if($compstYmd>$compMonthDate){//予約を跨がない予約(利用開始年月日が選択した日付と異なる)
                 $tdclass="not";
                 //$tdnum[0][$room_reserv]="not";
                 $stou[]=$pickstou->format('Hi');

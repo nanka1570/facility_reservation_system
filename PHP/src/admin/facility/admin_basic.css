@@ -143,8 +143,7 @@ tr:hover {
 }
 
 /* ページネーション */
-.pagination, .modal-pagination,
-.item-modal-pagination{
+.pagination, .modal-pagination{
     display: flex;
     justify-content: center;
     gap: 0.5rem;
@@ -155,8 +154,7 @@ tr:hover {
     background-color: #357ABD;
 } */
 
-.pagination a, .modal-pagination a,
-.item-modal-pagination a{
+.pagination a, .modal-pagination a{
     padding: 0.5rem 1rem;
     border: 1px solid var(--primary-color);
     border-radius: var(--border-radius);
@@ -164,17 +162,14 @@ tr:hover {
     text-decoration: none;
 }
 
-.pagination a:hover, .modal-pagination a:hover,
-.item-modal-pagination a:hover{
+.pagination a:hover, .modal-pagination a:hover{
     background-color:#a9c4df;
 }
 
-.pagination a.active, .modal-pagination a.active,
-.item-modal-pagination a.item-page-active{
+.pagination a.active, .modal-pagination a.active{
     background-color: var(--primary-color);
     color: white;
 }
-
 
 /* 警告・エラーメッセージ */
 .warning {

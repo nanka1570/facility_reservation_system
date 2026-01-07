@@ -93,3 +93,12 @@ p{
     font-size: 60px;
     width: 100%;
 }
+.category{
+    text-align: left;
+    font-size: 70px;
+    width: 100%;
+    -webkit-text-stroke-color: blue;
+    -webkit-text-stroke-width: 1px;
+    font-weight: bolder;
+    color: aqua;
+}

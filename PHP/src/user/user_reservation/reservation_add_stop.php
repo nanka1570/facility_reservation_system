@@ -7,6 +7,7 @@ include_once "../../common/session.php";
     <head>
         <meta charset="utf-8">
         <title></title>
+        <link rel="stylesheet" href="../../common/user_basic.css">
         <link rel="stylesheet" href="reservation.css">
         <meta name="" content="">
     </head>
@@ -31,11 +32,11 @@ include_once "../../common/session.php";
 
             print'<p class="check">仮予約を取り消しました</p>';
             print'<form action="../../login/user_home.php">';
-                print'<p class="buttons"><input type="submit" class="button" value="ホーム画面に戻る"></p>';
+                print'<p class="buttons"><input type="submit" class="color" value="ホーム画面に戻る"></p>';
             print'</form>';
             print'<p class="check">もう一度予約する場合はこちら</p>';
             print'<form action="room.php">';
-                print'<p class="buttons"><input type="submit" class="button" value="予約画面へ"></p>';
+                print'<p class="buttons"><input type="submit" class="color" value="予約画面へ"></p>';
             print'</form>';
         ?>
     </body>

@@ -81,6 +81,7 @@ select{
     border-color: black;
     border-style: solid;
     border-collapse: collapse;
+    background-color: lightblue;
 }
 .room{
     border-color: beige;
@@ -91,5 +92,27 @@ select{
 .buttoncolor{
     background-color: rgb(0, 255, 136);
     border: none;
-    width: 70px;
+    width: auto;
+    min-width: 100px;
+}
+.th_color{
+    background-color: aqua;
+}
+.td_color{
+    background-color: lightblue;
+}
+input[type="text"].item_css{
+    width: 30%;
+}
+input[name="number_of_user"]{
+    width: 30%;
+}
+input[type="submit"].color{
+    background-color: #4db4b4;
+}
+input[type="button"].color{
+    background-color: #4db4b4;
+}
+button[type="submit"]{
+    background-color: #4db4b4;
 }

@@ -20,11 +20,16 @@ include_once "../../common/sanitize.php";
         $secret_question=$_POST["question"];
         $secret_answer=$_POST['secret_answer'];
 
-        if($user_name==""){
+        print '<table class="sort">';
+        if(isset($user_name)=="()"){
             print 'ユーザー名が入力されていません。<br/>';
+        }elseif(isset($user_Id) == true){
+            print 'ユーザーIDが入力されていません。<br/>';
         }else{
-            print 'ユーザー名：';
+            print '<th>ユーザー名</th>';
+            print '<td>';
             print $user_name;
+            print '</td>';
             print '<br />';
         }
         if($pass == ''){
@@ -33,13 +38,13 @@ include_once "../../common/sanitize.php";
         if($pass != $pass2){
             print 'パスワードが一致しません。<br />';
         }
-    if($user_name=='' || $pass=='' || $pass!=$pass2){
+    if($user_name=='' || $pass=='' || $pass!=$pass2 || $user_Id==''){
         print '<br />';
         include_once "user_add.php";
     }else{
         print '<p class="alart">この内容で登録しますか？</p>';
-        $password=md5($pass);?>
-        <p class="text"><table class="table">
+?>
+        <p class="text">
         <tr><th>氏名<td><?php print $_POST['name1']; ?>
         <?php print $_POST['name2']; ?></td></th> </tr>
 
@@ -59,13 +64,14 @@ include_once "../../common/sanitize.php";
         //type=hidden：画面に表示せずに遷移先のページの$_POSTに渡す
         print '<input type="hidden" name="user_Id" value="'.$user_Id.'">';
         print '<input type="hidden" name="pass" value="'.$pass.'">';
-        print '<input type="hidden" name="pass2" value="'.$pass2.'">';
+        $p_h=password_hash($_POST['pass'],PASSWORD_DEFAULT); //0203
+        print '<input type="hidden" name="p_h" value="'.$p_h.'">';
         print '<input type="hidden" name="mail_address" value="'.$mail_address.'">';
         print '<input type="hidden" name="secret_question" value="'.$secret_question.'">';
         print '<input type="hidden" name="secret_answer" value="'.$secret_answer.'">';
         print '<br />';
-        print '<input type="button" onclick="history.back()" value="戻る">';
-        print '<input type="submit" value="登録">';
+        print '<input type="button" class="button" onclick="history.back()" value="戻る">';
+        print '<input type="submit" class="button" value="登録">';
         print '</form>';
     }
     ?>

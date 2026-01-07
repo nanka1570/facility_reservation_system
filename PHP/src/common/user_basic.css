@@ -70,7 +70,7 @@ input[type="reset"] {
     /* ボタンの文字の色 */
     color: white;
     /* ボタンの色 */
-    background-color: #4A90E2;
+    background-color: rgb(0,255,136);
 }
 
 /* テキスト入力フィールド */
@@ -81,7 +81,6 @@ input[type="number"],
 input[type="search"],
 input[type="tel"],
 input[type="url"] {
-    display: block;
     width: 100%;
     padding: 8px 12px;
     font-size: 1rem;
@@ -109,7 +108,7 @@ textarea {
 
 /* セレクトボックス */
 select {
-    display: block;
+    /* display: block; */
     width: 100%;
     padding: 8px 12px;
     font-size: 1rem;

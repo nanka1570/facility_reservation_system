@@ -59,7 +59,7 @@ try
     if($stmt -> rowCount() == 0)
     {
         print'<p class="no-results">予約が見つかりませんでした。</p>';
-        include_once "../../login/admin_home.php";
+        print '<input type="button" class="home-button" onclick=location.href="../../login/admin_home.php" name="back" value="ホームへ戻る">';
     }
     else
     {

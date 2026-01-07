@@ -6,7 +6,6 @@ include_once "../../common/session.php";
 <html> 
 <head> 
 <meta charset="UTF-8"> 
-<link rel="stylesheet" href="../../common/user_basic.css">
 <link rel="stylesheet" href="reservation.css"> 
 <title></title> 
 </head> 
@@ -31,13 +30,14 @@ try
     // DateTimeオブジェクトを文字列に変換 
     $sql = "SELECT * 
             FROM reservation_table 
-            WHERE start_time_of_use > :currentDateTime AND user_id = :user_Id AND cancel_flag='' ";//
+            WHERE start_time_of_use < :currentDateTime AND end_time_of_use >= :currentDateTime2 AND user_id = :user_Id AND cancel_flag='' ";//
     /*$sql = "SELECT * 
         FROM reservation_table 
         WHERE start_time_of_use > :currentDateTime AND user_id = :user_Id AND cancel_flag='' ";*/ //学校用
     $stmt = $dbh->prepare($sql); 
     $stmt->bindParam(':user_Id', $user_Id); 
     $stmt->bindParam(':currentDateTime', $formattedCurrentDateTime, PDO::PARAM_STR);
+    $stmt->bindParam(':currentDateTime2', $formattedCurrentDateTime, PDO::PARAM_STR);
     $stmt -> execute();
     print'<p class="title">予約状況一覧</p>'; 
 
@@ -45,23 +45,22 @@ try
     {
         print '<p class="check">予約が見つかりませんでした。</p>';
         print '<form>';
-        print '<p class="buttons"><input type="button" class="color" onclick=location.href="../../login/user_home.php" value="ホーム画面に戻る"></p>';//
+        print '<input type="button" class="button" onclick=location.href="../../login/user_home.php" value="ホーム画面に戻る">';//
     print '</form>';
     }
     else
     {
-        print '<form action="reservation_edit_check.php" method="post">'; 
-        //$reservation_number = 0;
+        print '<form action="reserv_extension_check.php" method="post">'; 
         print'<table>';
             print'<tr>';
-                print'<th scope="col" class="th_color"></th>';
-                print'<th scope="col" class="th_color">ユーザーID</th>';
-                print'<th scope="col" class="th_color">部屋名</th>';
-                print'<th scope="col" class="th_color">使用人数</th>';
-                print'<th scope="col" class="th_color">利用開始日時</th>';
-                print'<th scope="col" class="th_color">利用終了日時</th>';
-                print'<th scope="col" class="th_color">合計料金</th>';
-                print'<th scope="col" class="th_color">備考欄</th>';
+                print'<th scope="col"></th>';
+                print'<th scope="col">ユーザーID</th>';
+                print'<th scope="col">部屋名</th>';
+                print'<th scope="col">使用人数</th>';
+                print'<th scope="col">利用開始日時</th>';
+                print'<th scope="col">利用終了日時</th>';
+                print'<th scope="col">合計料金</th>';
+                print'<th scope="col">備考欄</th>';
             print'</tr>';
         while(true) 
         {  
@@ -89,24 +88,29 @@ try
                 print'<td class="list">'.$rec['sum_of_price'].'</td>';
                 print'<td class="list">'.$rec['remark'].'</td>';
             print'</tr>';
-            //$reservation_number++;
         }
+
+        //延長する時間
+        print '<input type="radio" name="selected_extension_minute" value="15">15分<br>';
+        print '<input type="radio" name="selected_extension_minute" value="30">30分<br>';
+        print '<input type="radio" name="selected_extension_minute" value="45">45分<br>';
+        print '<input type="radio" name="selected_extension_minute" value="60">60分<br>';
 
         print '</table>';
         print '<br>';
-            print '<p class="buttons"><input type="submit" class="color" value="選択した予約を変更する"></p>'; 
+            print '<p class="buttons"><input type="submit" class="button" value="選択した予約の終了時間を延長する"></p>'; 
         print '</form>';
 
         $dateToday = date("Y-m-d");
-        print'<p class="check">検索</p>';
-        print'<form method="post" action="reservation_edit_list_search.php">';
-            print'<p class="check">日付</p>';
-            print'<p class="check"><input type="date" class="date" name="search_date" min="'.$dateToday.'"></p>';
-            print'<p class="buttons"><input type="submit" class="color" value="検索"></p>';
-        print'</form>';
+        // print'<p class="check">検索</p>';
+        // print'<form method="post" action="reservation_edit_list_search.php">';
+        //     print'<p class="check">日付</p>';
+        //     print'<p class="check"><input type="date" class="date" name="search_date" min="'.$dateToday.'"></p>';
+        //     print'<p class="buttons"><input type="submit" class="button" value="検索"></p>';
+        // print'</form>';
 
         print '<form>';
-            print '<p class="buttons"><input type="button" class="color" onclick=location.href="../../login/user_home.php" value="ホーム画面に戻る"></p>';//
+            print '<p class="buttons"><input type="button" class="button" onclick=location.href="../../login/user_home.php" value="ホーム画面に戻る"></p>';//
         print '</form>';
          
     }
@@ -119,8 +123,6 @@ catch (Exception $e)
     echo 'エラー: ' . $e->getMessage(); 
     exit(); 
 } 
-
 ?>
 </body>
-<script src="../../common/ebi.js"></script>
 </html>

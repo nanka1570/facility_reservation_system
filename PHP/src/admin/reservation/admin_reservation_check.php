@@ -52,7 +52,7 @@ include_once "../../common/session.php";
                 //var_dump($item_pieces_data);
                 //print"<br>";
             }
-
+            $item_pieces_data_cnt = count($item_pieces_data);///////////////////////////////---------------------
 
             //貸し出し備品がある場合、備品名から番号を取得
             if($item_names!=null){
@@ -151,6 +151,7 @@ include_once "../../common/session.php";
             $check_user_id_cnt = "true";
             $check_numeric = "true";
             $check_max_people = "true";
+            $check_item_cnt = "true";//--------------------------------------------------------
             $check_item_max = "true";
             $check_time = "true";
             ////////////////////////////////////////////////////////////////
@@ -209,7 +210,24 @@ include_once "../../common/session.php";
                 }
             }
 
-            if($check_user_id_null == "true" && $check_user_id_cnt=="true" && $check_numeric=="true" && $check_max_people=="true"){
+            //////////////////////////////////////////////////////////////////////////////////////------------
+            if($check_user_id_null == "true" && $check_user_id_cnt=="true" && $check_numeric=="true" && $check_max_people = "true"){
+                if($item_cnt != $item_pieces_data_cnt){
+                    print'<p>備品の選択が間違えています。</p>';
+                    print'<form method="post" action="admin_reservation_add_01.php">';
+                        print'<input type="hidden" name="room_ctg" value="'.$room_ctg.'">';
+                        print'<input type="submit" value="予約画面に戻る">';
+                    print'</form>';
+                    print'<form method="post" action="../../login/admin_home.php">';
+                        print'<input type="submit" value="ホーム画面に戻る">';
+                    print'</form>';
+                    $check_item_cnt = "false";
+                }
+            }
+
+            //////////////////////////////////////////////////////////////////////////////////////------------
+
+            if($check_user_id_null == "true" && $check_user_id_cnt=="true" && $check_numeric=="true" && $check_max_people=="true" && $check_item_cnt == "true"){
                 $reserve_num = 0;
                 $item_cnt_check = "true";
                 if($item_name_data!=null){
@@ -244,7 +262,7 @@ include_once "../../common/session.php";
                 }   
             }
 
-            if($check_user_id_null == "true" && $check_user_id_cnt == "true" && $check_numeric == "true" && $check_max_people == "true" && $check_item_max == "true"){
+            if($check_user_id_null == "true" && $check_user_id_cnt == "true" && $check_numeric == "true" && $check_max_people == "true" && $check_item_cnt == "true" && $check_item_max == "true"){
                 if($r_starttime >= $r_endtime){
                     print'<p>予約時間が適切ではありません。</p>';
                     print'<form method="post" action="admin_reservation_add_01.php">';
@@ -258,7 +276,7 @@ include_once "../../common/session.php";
                 }
             }
 
-            if($check_user_id_null == "true" && $check_user_id_cnt == "true" && $check_numeric == "true" && $check_max_people == "true" && $check_item_max == "true" && $check_time == "true"){
+            if($check_user_id_null == "true" && $check_user_id_cnt == "true" && $check_numeric == "true" && $check_max_people == "true" && $check_item_cnt == "true" && $check_item_max == "true" && $check_time == "true"){
                 $sql="SELECT reservation_number
                 FROM reservation_table
                 WHERE(('$r_starttime'=start_time_of_use)or
@@ -311,9 +329,10 @@ include_once "../../common/session.php";
                                 room_number,
                                 number_of_user,
                                 start_time_of_use, 
-                                end_time_of_use
+                                end_time_of_use,
+                                cancel_flag
                                 )
-                        VALUES (?,?,?,?,?,?)";//             
+                        VALUES (?,?,?,?,?,?,?)";//             
                 $stmt = $dbh->prepare($sql_tentative);
                 if($one_time_user_id == null){
                     $stmt->execute([
@@ -323,7 +342,8 @@ include_once "../../common/session.php";
                         $room_number,
                         $number_of_user,
                         $r_starttime->format('Y-m-d H:i'),
-                        $r_endtime->format('Y-m-d H:i')
+                        $r_endtime->format('Y-m-d H:i'),
+                        ''
                     ]);
                 }
                 else{
@@ -334,7 +354,8 @@ include_once "../../common/session.php";
                         $room_number,
                         $number_of_user,
                         $r_starttime->format('Y-m-d H:i'),
-                        $r_endtime->format('Y-m-d H:i')
+                        $r_endtime->format('Y-m-d H:i'),
+                        ''
                     ]);
                 }
 

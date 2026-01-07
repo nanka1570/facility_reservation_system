@@ -9,6 +9,8 @@ include_once "../../common/session.php";
         <meta charset="utf-8">
         <title></title>
         <meta name="" content="">
+        <link rel="stylesheet" href="../../common/admin_basic.css">
+        <link rel="stylesheet" href="check.css">
     </head>
     <body>
         <?php
@@ -50,6 +52,7 @@ include_once "../../common/session.php";
                 //print"<br>";
             }
 
+            $item_pieces_data_cnt = count($item_pieces_data);///////////////////////////////---------------------
 
             //貸し出し備品がある場合、備品名から番号を取得
             if($item_names!=null){
@@ -149,6 +152,7 @@ include_once "../../common/session.php";
             $check_user_id_cnt = "true";
             $check_numeric = "true";
             $check_max_people = "true";
+            $check_item_cnt = "true";//--------------------------------------------------------
             $check_item_max = "true";
             $check_time = "true";
             ////////////////////////////////////////////////////////////////
@@ -219,8 +223,24 @@ include_once "../../common/session.php";
                 }
             }
 
+            //////////////////////////////////////////////////////////////////////////////////////------------
+            if($check_user_id_null == "true" && $check_user_id_cnt=="true" && $check_numeric=="true" && $check_max_people = "true"){
+                if($item_cnt != $item_pieces_data_cnt){
+                    print'<p>備品の選択が間違えています。</p>';
+                    print'<form method="post" action="admin_reservation_add_01.php">';
+                        print'<input type="hidden" name="room_ctg" value="'.$room_ctg.'">';
+                        print'<input type="submit" value="予約画面に戻る">';
+                    print'</form>';
+                    print'<form method="post" action="../../login/admin_home.php">';
+                        print'<input type="submit" value="ホーム画面に戻る">';
+                    print'</form>';
+                    $check_item_cnt = "false";
+                }
+            }
 
-            if($check_user_id_null == "true" && $check_user_id_cnt=="true" && $check_numeric=="true" && $check_max_people=="true"){
+            //////////////////////////////////////////////////////////////////////////////////////------------
+
+            if($check_user_id_null == "true" && $check_user_id_cnt=="true" && $check_numeric=="true" && $check_max_people=="true" && $check_item_cnt == "true"){
                 $reserve_num = 0;
                 $item_cnt_check = "true";
                 if($item_name_data!=null){
@@ -258,7 +278,7 @@ include_once "../../common/session.php";
                 }   
             }
 
-            if($check_user_id_null == "true" && $check_user_id_cnt == "true" && $check_numeric == "true" && $check_max_people == "true" && $check_item_max == "true"){
+            if($check_user_id_null == "true" && $check_user_id_cnt == "true" && $check_numeric == "true" && $check_max_people == "true" && $check_item_cnt == "true" && $check_item_max == "true"){
                 if($r_starttime >= $r_endtime){
                     print'<p>予約時間が適切ではありません。</p>';
                     print'<form method="post" action="admin_reservation_edit_01.php">';
@@ -276,7 +296,7 @@ include_once "../../common/session.php";
             }           
 
 
-            if($check_user_id_null == "true" && $check_user_id_cnt == "true" && $check_numeric == "true" && $check_max_people == "true" && $check_item_max == "true" && $check_time == "true"){
+            if($check_user_id_null == "true" && $check_user_id_cnt == "true" && $check_numeric == "true" && $check_max_people == "true" && $check_item_cnt == "true" && $check_item_max == "true" && $check_time == "true"){
                 $sql="SELECT reservation_number
                 FROM reservation_table
                 WHERE(('$r_starttime'=start_time_of_use)or
@@ -327,15 +347,13 @@ include_once "../../common/session.php";
                 {
                     if($rental_ex=='R')
                     {
-                        var_dump($item_names);
-                        var_dump($item_cnt);
+                       
                         for($i=0;$i<$item_cnt;$i++)
                         {
                             if(empty($item_names[$i])){
                                 continue;
                             }
-                            echo $item_names[$i];
-                            echo $item_pieces[$i].'個';
+                            
                             echo '<br>';
                         }
                     }
@@ -403,11 +421,12 @@ include_once "../../common/session.php";
                     echo '<p>利用終了時間: ' . $r_endtime->format('Y-m-d H:i') . '</p>';
 
                     //貸出備品がある場合は表示
-                    echo '<p>貸出備品</P>';
+                    echo '<p>貸出備品<br>';
                     if($item_name_data!=null){
                         for($display = 0; $display < $item_cnt; $display++){
                             echo $item_name_data[$display].':'.$item_pieces_data[$display].'個<br><br>';
                         }
+                        print '</P>';
                     }
                     else{
                         echo '<p>なし</P>';

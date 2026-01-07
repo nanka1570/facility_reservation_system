@@ -1,6 +1,6 @@
 <?php 
 include_once "../../common/DB_switch.php";
-// include_once "../../common/connect.php"; 
+//include_once "../../common/connect.php"; 
 include_once "../../common/session.php"; 
 ?> 
 <!DOCTYPE html> 
@@ -23,8 +23,7 @@ try
     if ($user_Id == "") 
     { 
         print '<p>管理者IDが入力されていません。</p>'; 
-        include_once "../../login/user_login.php";
-        exit(); 
+        print '<input type="button" class="home-button" onclick=location.href="../../login/admin_home.php" name="back" value="ホームへ戻る">';
     }
 
     date_default_timezone_set('Asia/Tokyo'); 
@@ -59,7 +58,7 @@ try
     if($stmt -> rowCount() == 0)
     {
         print'<p class="no-results">予約が見つかりませんでした。</p>';
-        include_once "../../login/admin_home.php";
+        print '<input type="button" class="home-button" onclick=location.href="../../login/admin_home.php" name="back" value="ホームへ戻る">';
     }
     else
     {

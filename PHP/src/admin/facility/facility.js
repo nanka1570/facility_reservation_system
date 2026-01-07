@@ -1,3 +1,25 @@
+// function submitAction(action) {
+//     const selectedFacility = document.querySelector("input[name='selected_room']:checked");
+    
+//     if (!selectedFacility) {
+//         alert(`${action === 'change' ? '変更' : '削除'}する施設を選択してください。`);
+//         return;
+//     }
+
+//     const roomNumber = selectedFacility.value;
+//     const categoryNumber = selectedFacility.getAttribute('data-category-number');
+
+//     const actions = {
+//         // 'add': '../facility_edit/facility_add.php',
+//         'change': `facility_change.php?room_number=${roomNumber}&category_number=${categoryNumber}`,
+//         'delete': `facility_delete.php?room_number=${roomNumber}&category_number=${categoryNumber}`
+//     };
+
+//     if (actions[action]) {
+//         window.location.href = actions[action];
+//     }
+// }
+
 // ページ読み込み時の初期化処理
 document.addEventListener('DOMContentLoaded', function() {
     // 各機能の初期化
@@ -7,9 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
     FacilityManager.category.initialize();
     FacilityManager.deleteOptions.initialize();
     FacilityManager.rowSelection.initialize();
-
-    //itemのモーダル
-    FacilityManager.items.initialize();
 
     // アコーディオンの初期状態を確認
     FacilityManager.accordion.update();
@@ -729,415 +748,67 @@ const FacilityManager = {
                 });
             }
         }
-    },
-    // 備品管理
-    items: {
-        initialize() {
-            this.initializePagination();
-            this.initializeModalEvents();
-            this.setupFormSubmission();
-            this.setupAddItemForm();
-            this.setupDebugLogging();  // デバッグログ設定を追加
-        },
-
-        setupDebugLogging() {
-            // フォーム送信をデバッグするためのイベントリスナー
-            document.addEventListener('submit', (e) => {
-                if (e.target.closest('#itemModal')) {
-                    console.log('フォーム送信イベント検知:', {
-                        formData: new FormData(e.target),
-                        targetForm: e.target
-                    });
-                }
-            });
-        },
-
-        setupFormSubmission() {
-            const addItemForm = document.querySelector('.add-item-form');
-            if (addItemForm) {
-                addItemForm.addEventListener('submit', (e) => {
-                    e.preventDefault();  // デフォルトの送信を防止
-                    
-                    // フォームデータの収集
-                    const formData = new FormData(addItemForm);
-                    
-                    // 必須項目のチェック
-                    const itemName = formData.get('new_item_name');
-                    const itemTotal = formData.get('new_item_total');
-                    const itemPrice = formData.get('new_item_price');
-                    
-                    if (!itemName || !itemTotal || !itemPrice) {
-                        alert('すべての項目を入力してください。');
-                        return;
-                    }
-                    
-                    // データ送信
-                    fetch(window.location.href, {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.text();
-                    })
-                    .then(() => {
-                        window.location.reload();
-                    })
-                    .catch(error => {
-                        console.error('追加処理でエラーが発生:', error);
-                        alert('追加処理中にエラーが発生しました。');
-                    });
-                });
-            }
-        },
-
-        setupAddItemForm() {
-            const addItemForm = document.querySelector('.add-item-form');
-            if (addItemForm) {
-                addItemForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    console.log('フォーム送信開始');
-    
-                    const formData = new FormData(addItemForm);
-                    
-                    // デバッグ用にフォームデータの内容を確認
-                    for (let pair of formData.entries()) {
-                        console.log(pair[0] + ': ' + pair[1]);
-                    }
-    
-                    // add_itemパラメータを明示的に追加
-                    formData.append('add_item', 'true');
-    
-                    fetch(window.location.href, {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => {
-                        console.log('レスポンスステータス:', response.status);
-                        return response.text();
-                    })
-                    .then(text => {
-                        console.log('サーバーレスポンス:', text);
-                        window.location.reload();
-                    })
-                    .catch(error => {
-                        console.error('エラー:', error);
-                        alert('エラーが発生しました: ' + error.message);
-                    });
-                });
-            }
-        },
-    
-        initializeModalEvents() {
-            // モーダル制御
-            window.openItemModal = () => {
-                document.getElementById('itemModal').style.display = 'block';
-            };
-    
-            window.closeItemModal = () => {
-                document.getElementById('itemModal').style.display = 'none';
-            };
-
-            // モーダル外クリック処理を addEventListener に変更
-            document.addEventListener('click', function(event) {
-                const itemModal = document.getElementById('itemModal');
-                if (event.target === itemModal) {
-                    window.closeItemModal();
-                }
-            });
-    
-            window.toggleSelectAllItems = () => {
-                    const selectAllCheckbox = document.getElementById('selectAllItems');
-                    const checkboxes = document.querySelectorAll('.item-checkbox');
-                    checkboxes.forEach(checkbox => {
-                        checkbox.checked = selectAllCheckbox.checked;
-                    });
-                };
-
-            // モーダル内のフォームのデフォルト送信を防ぐ
-            const itemModal = document.getElementById('itemModal');
-            if (itemModal) {
-                const forms = itemModal.querySelectorAll('form');
-                forms.forEach(form => {
-                    form.addEventListener('submit', (e) => {
-                        e.preventDefault();
-                    });
-                });
-            }
-            },
-
-        initializePagination() {
-            const modal = document.getElementById('itemModal');
-            if (!modal) return;
-        
-            // モーダル内のクリックイベントを監視
-            modal.addEventListener('click', function(e) {
-                const pageLink = e.target.closest('.item-modal-pagination a');  // クラス名を変更
-                if (!pageLink) return;
-                
-                e.preventDefault();
-                
-                const url = new URL(pageLink.href);
-                const page = url.searchParams.get('item_page');
-                
-                const currentUrl = new URL(window.location.href);
-                const params = new URLSearchParams(currentUrl.search);
-                
-                // category_pageパラメータを保持
-                if (params.has('category_page')) {
-                    const categoryPage = params.get('category_page');
-                    params.set('category_page', categoryPage);
-                }
-                params.set('item_page', page);
-        
-                fetch(`${window.location.pathname}?${params.toString()}`)
-                    .then(response => response.text())
-                    .then(html => {
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(html, 'text/html');
-        
-                        // テーブル本体の更新
-                        const newTableBody = doc.querySelector('#itemTableBody');
-                        const currentTableBody = modal.querySelector('#itemTableBody');
-                        if (newTableBody && currentTableBody) {
-                            currentTableBody.innerHTML = newTableBody.innerHTML;
-                        }
-        
-                        // ページネーションの更新
-                        const newPagination = doc.querySelector('.item-modal-pagination');  // クラス名を変更
-                        const currentPagination = modal.querySelector('.item-modal-pagination');  // クラス名を変更
-                        if (newPagination && currentPagination) {
-                            currentPagination.innerHTML = newPagination.innerHTML;
-                        }
-        
-                        // URLを更新
-                        window.history.replaceState(null, '', `?${params.toString()}`);
-        
-                        // チェックボックスをリセット
-                        document.getElementById('selectAllItems').checked = false;
-                    })
-                    .catch(error => {
-                        console.error('ページ取得エラー:', error);
-                        alert('ページの更新中にエラーが発生しました。');
-                    });
-            });
-        },
-
-        updateItems() {
-            const selectedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
-            if (selectedCheckboxes.length === 0) {
-                alert('更新する備品を選択してください。');
-                return;
-            }
-    
-            if (!confirm('選択した備品を更新しますか？')) {
-                return;
-            }
-    
-            // デバッグ用のログ出力
-            console.log('選択された備品:', selectedCheckboxes);
-    
-            const formData = new FormData();
-            formData.append('update_items', 'true');
-    
-            const updateData = Array.from(selectedCheckboxes).map(checkbox => {
-                const row = checkbox.closest('tr');
-                const itemData = {
-                    item_number: checkbox.getAttribute('data-item-number'),
-                    item_name: row.querySelector('.item-name-input').value,
-                    item_total: row.querySelector('.item-total-input').value,
-                    item_price: row.querySelector('.item-price-input').value
-                };
-                
-                // デバッグログ
-                console.log('処理する備品データ:', itemData);
-                
-                return itemData;
-            });
-    
-            updateData.forEach((data) => {
-                formData.append('item_numbers[]', data.item_number);
-                formData.append('item_names[]', data.item_name);
-                formData.append('item_totals[]', data.item_total);
-                formData.append('item_prices[]', data.item_price);
-            });
-    
-            // Fetch APIを使用してPOSTリクエストを送信
-            fetch(window.location.href, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                console.log('サーバーレスポンス:', response);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(() => {
-                window.location.reload();
-            })
-            .catch(error => {
-                console.error('更新処理でエラーが発生:', error);
-                alert('更新処理中にエラーが発生しました。');
-            });
-        },
-    
-        deleteItems() {
-            const selectedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
-            if (selectedCheckboxes.length === 0) {
-                alert('削除する備品を選択してください。');
-                return;
-            }
-    
-            if (!confirm('選択した備品を削除しますか？')) {
-                return;
-            }
-    
-            // デバッグ用のログ出力
-            console.log('削除対象の備品:', selectedCheckboxes);
-    
-            const formData = new FormData();
-            formData.append('delete_items', 'true');
-    
-            Array.from(selectedCheckboxes).forEach(checkbox => {
-                const itemNumber = checkbox.getAttribute('data-item-number');
-                formData.append('item_numbers[]', itemNumber);
-                console.log('削除する備品番号:', itemNumber);
-            });
-    
-            fetch(window.location.href, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                console.log('サーバーレスポンス:', response);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(() => {
-                window.location.reload();
-            })
-            .catch(error => {
-                console.error('削除処理でエラーが発生:', error);
-                alert('削除処理中にエラーが発生しました。');
-            });
-        }
-
-    //     //この下で更新または削除
-    //     updateItems() {
-    //         const selectedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
-    //         if (selectedCheckboxes.length === 0) {
-    //             alert('更新する備品を選択してください。');
-    //             return;
-    //         }
-    
-    //         if (!confirm('選択した備品を更新しますか？')) {
-    //             return;
-    //         }
-    // ///////////////////////////////////////////
-
-
-
-    // /////////////////////
-    //         const updateData = Array.from(selectedCheckboxes).map(checkbox => {
-    //             const row = checkbox.closest('tr');
-    //             return {
-    //                 item_number: checkbox.getAttribute('data-item-number'),
-    //                 item_name: row.querySelector('.item-name-input').value,
-    //                 item_total: row.querySelector('.item-total-input').value,
-    //                 item_price: row.querySelector('.item-price-input').value
-    //             };
-    //         });
-    
-    //         const form = document.createElement('form');
-    //         form.method = 'POST';
-            
-    //         const currentUrl = new URL(window.location.href);
-    //         form.action = `${currentUrl.pathname}${currentUrl.search}`;
-    
-    //         form.appendChild(FacilityManager.utils.createHiddenInput('update_items', 'true'));
-    //         updateData.forEach((data) => {
-    //             form.appendChild(FacilityManager.utils.createHiddenInput(`item_numbers[]`, data.item_number));
-    //             form.appendChild(FacilityManager.utils.createHiddenInput(`item_names[]`, data.item_name));
-    //             form.appendChild(FacilityManager.utils.createHiddenInput(`item_totals[]`, data.item_total));
-    //             form.appendChild(FacilityManager.utils.createHiddenInput(`item_prices[]`, data.item_price));
-    //         });
-    
-    //         document.body.appendChild(form);
-    //         form.submit();
-    //     },
-
-    //     deleteItems() {
-    //         const selectedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
-            
-    //         if (selectedCheckboxes.length === 0) {
-    //             alert('削除する備品を選択してください。');
-    //             return;
-    //         }
-            
-    //         if (!confirm('選択した備品を削除しますか？')) {
-    //             return;
-    //         }
-            
-    //         const formData = new FormData();
-    //         formData.append('delete_items', 'true');
-            
-    //         Array.from(selectedCheckboxes).forEach(checkbox => {
-    //             formData.append('item_numbers[]', checkbox.getAttribute('data-item-number'));
-    //         });
-            
-    //         fetch(window.location.href, {
-    //             method: 'POST',
-    //             body: formData
-    //         })
-    //         .then(() => {
-    //             window.location.reload();
-    //         })
-    //         .catch(error => {
-    //             console.error('削除処理でエラーが発生しました:', error);
-    //         });
-    //     }
-    
-        // deleteItems() {
-        //     const selectedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
-        //     if (selectedCheckboxes.length === 0) {
-        //         alert('削除する備品を選択してください。');
-        //         return;
-        //     }
-    
-        //     if (!confirm('選択した備品を削除しますか？')) {
-        //         return;
-        //     }
-    
-        //     const itemNumbers = Array.from(selectedCheckboxes).map(checkbox => 
-        //         checkbox.getAttribute('data-item-number')
-        //     );
-    
-        //     const form = document.createElement('form');
-        //     form.method = 'POST';
-            
-        //     const currentUrl = new URL(window.location.href);
-        //     form.action = `${currentUrl.pathname}${currentUrl.search}`;
-    
-        //     form.appendChild(FacilityManager.utils.createHiddenInput('delete_items', 'true'));
-        //     itemNumbers.forEach(number => {
-        //         form.appendChild(FacilityManager.utils.createHiddenInput('item_numbers[]', number));
-        //     });
-    
-        //     document.body.appendChild(form);
-        //     form.submit();
-        // }
-    
     }
 };
 
-// // デバッグ
-// console.log(createItemHiddenInput(FacilityManager.items.form));
+//////////////////////////////////////////////////////////////////////////////////////////
+// 時間延長設定モーダルの関数(1/31追加,2/2 18:08分修正)2/4修正
+// ボタンのクリックイベントハンドラ
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.extension-toggle-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const roomNumber = this.dataset.roomNumber;
+            const currentStatus = this.dataset.currentStatus;
+            // 現在の状態を確認して反対の状態に設定
+            const newStatus = currentStatus === '可' ? '不' : '可';
+            
+            console.log('Current status:', currentStatus); // デバッグ用
+            console.log('New status:', newStatus); // デバッグ用
+            
+            // ボタンを一時的に無効化
+            this.disabled = true;
 
-
-/////////////////////////////////////////////////////
+            fetch('facility_edit_top.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    update_extensions: true,
+                    extensions: [{
+                        room_number: roomNumber,
+                        time_extension: newStatus
+                    }]
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // console.log(data);
+                if (data.success) {
+                    // ボタンのテキストと状態を更新
+                    this.textContent = newStatus;
+                    this.dataset.currentStatus = newStatus;
+                    
+                    // クラスの切り替え
+                    if (newStatus === '可') {
+                        this.classList.remove('status-disabled');
+                        this.classList.add('status-enabled');
+                    } else {
+                        this.classList.remove('status-enabled');
+                        this.classList.add('status-disabled');
+                    }
+                } else {
+                    alert('更新に失敗しました。');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('エラーが発生しました。');
+            })
+            .finally(() => {
+                // ボタンを再度有効化
+                this.disabled = false;
+            });
+        });
+    });
+});

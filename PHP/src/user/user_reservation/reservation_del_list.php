@@ -7,6 +7,7 @@ include_once "../../common/session.php";
 <html> 
 <head> 
 <meta charset="UTF-8"> 
+<link rel="stylesheet" href="../../common/user_basic.css">
 <link rel="stylesheet" href="reservation.css"> 
 <title></title> 
 </head> 
@@ -44,9 +45,9 @@ try
      print '<p class="title">予約状況一覧</p><br>'; 
     if($stmt -> rowCount() == 0)
     {
-        echo print '<p class="check">予約が見つかりませんでした。,/p>';
+        print '<p class="check">予約が見つかりませんでした。</p>';
         print '<form action="../../login/user_home.php">';
-        print '<input type="submit" value="ホーム画面に戻る">';
+        print '<p class="buttons"><input type="submit" class="color" value="ホーム画面に戻る"></p>';
         print '</form>';
     }
     else
@@ -55,13 +56,13 @@ try
         //$reservation_number = 0;
         print'<table>';
             print'<tr>';
-                print'<th scope="col"></th>';
-                print'<th scope="col">部屋名</th>';
-                print'<th scope="col">使用人数</th>';
-                print'<th scope="col">利用開始日時</th>';
-                print'<th scope="col">利用終了日時</th>';
-                print'<th scope="col">合計料金</th>';
-                print'<th scope="col">備考欄</th>';
+                print'<th scope="col" class="th_color"></th>';
+                print'<th scope="col" class="th_color">部屋名</th>';
+                print'<th scope="col" class="th_color">使用人数</th>';
+                print'<th scope="col" class="th_color">利用開始日時</th>';
+                print'<th scope="col" class="th_color">利用終了日時</th>';
+                print'<th scope="col" class="th_color">合計料金</th>';
+                print'<th scope="col" class="th_color">備考欄</th>';
             print'</tr>';
         while(true) 
         {  
@@ -101,17 +102,17 @@ try
         }
         print '</table>';           
     
-            print '<p class="buttons"><input type="submit" class="button" value="選択した予約をキャンセル"></p>'; 
+            print '<p class="buttons"><input type="submit" class="color" value="選択した予約をキャンセル"></p>'; 
         print '</form>';
         $dateToday = date("Y-m-d");
         print'<p class="check">日付で検索</p>';
         print'<form method="post" action="reservation_del_list_search.php">';
             print'<p class="check">日付</p>';
             print'<p class="check"><input type="date" class="date" name="search_date" min="'.$dateToday.'"><br/>';
-            print'<p class="buttons"><input type="submit" class="button" value="検索"></p>';
+            print'<p class="buttons"><input type="submit" class="color" value="検索"></p>';
         print'</form>';
         print '<form action="../../login/user_home.php">';
-            print '<p class="buttons"><input type="submit" class="button" value="ホーム画面に戻る"></p>';
+            print '<p class="buttons"><input type="submit" class="color" value="ホーム画面に戻る"></p>';
         print '</form>';
          
     }
@@ -125,4 +126,5 @@ catch (Exception $e)
 ?> 
 
 </body> 
+<script src="../../common/ebi.js"></script>
 </html>

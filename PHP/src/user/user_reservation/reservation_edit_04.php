@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>予約表示</title>
+<link rel="stylesheet" href="../../common/user_basic.css">
 <link rel="stylesheet" href="reservation.css">
 </head>
 <body>
@@ -38,8 +39,9 @@ if($dateToday == $reserveDate || $reserveDate==""){
 else{
 include_once "../../common/connect.php";
 include_once "../../common/session.php";
+print'<p class="day_font">';
 print $reserveDate;
-print "<br>";
+print "</p>";
 
 ?>
 <table>
@@ -50,7 +52,7 @@ print "<br>";
         include "room_count.php";//部屋名と部屋の数を取得
         //$room_cnt = 1;
         for($i = 0; $i < $room_cnt; $i++){
-            print'<th scope="col">';print"{$room_name[$i]}";//部屋名表記
+            print'<th scope="col" class="th_color">';print"{$room_name[$i]}";//部屋名表記
             //print $room_name[$i];
             print'</th>';
         }
@@ -66,7 +68,7 @@ print "<br>";
         $tablei_r= sprintf('%02d',(($n+1)*$unit_time)%60);//:ii
         print"<tr>";
             //if($tableh_l<=$start_dateH){   
-            print"<th>";
+            print'<th class="td_color">';
                 //時間表示の左側
                 print $tableh_l.":".$tablei_l."~";
                 $tbleft=$tableh_l.$tablei_l;
@@ -149,7 +151,7 @@ print "<br>";
                             print'<input type="hidden" name="start" value='."{$start_time}";print'>';
                             print'<input type="hidden" name="date" value='."{$reserveDate}";print'>';
                             print '<class="buttoncolor">';
-                            print'<input type="submit" class="buttoncolor" value="〇">';
+                            print'<input type="submit" class="buttoncolor" value="予約">';
                             print '</buttoncolor>';
                         print'</form>';
                     print "</td>";
@@ -171,7 +173,7 @@ print "<br>";
                         print'<input type="hidden" name="start" value='."{$start_time}";print'>';
                         print'<input type="hidden" name="date" value='."{$reserveDate}";print'>';
                         print '<class="buttoncolor">';
-                        print'<input type="submit" class="buttoncolor" value="〇">';
+                        print'<input type="submit" class="buttoncolor" value="予約">';
                         print '</buttoncolor>';
                     print'</form>';
                     print "</td>";
@@ -181,7 +183,7 @@ print "<br>";
         }//for終了
         print "</tr>";   
     }
-}
+
 ?>
 </table>
 <?php
@@ -266,7 +268,7 @@ print "<br>";
         print'<p><input type="text" class="bikou" name="remark"></p>';
         print'<input type="hidden" name="user_id" value="'.$_POST['user_id'].'">';//
         print'<input type="hidden" name="reservation_number" value="'.$reservation_number.'">';
-        print'<p><input type="submit" class="button" value="予約変更確認画面へ"></p>';
+        print'<p><input type="submit" class="color" value="予約変更確認画面へ"></p>';
            
     print'</form>';
 
@@ -277,13 +279,14 @@ print "<br>";
         print'<input type="hidden" name="room_ctg" value='."{$room_num}";print'>';
         print'<input type="hidden" name="reservation_number" value="'.$reservation_number.'">';
         print'<input name="date" class="date" type="date" min="'.$dateToday; print'"/>';
-        print'<input type="submit" class="button" value="別の日付へ">';
+        print'<input type="submit" class="color" value="別の日付へ">';
         print'</form>';
         print'<p class="font">予約変更を中止する</p>';
         print'<form method="post" action="reservation_edit_stop.php">';
         print'<input type="hidden" name="reservation_number" value="'.$reservation_number.'">';
-    print'<input type="submit" class="button" value="予約変更を中止する">';
+    print'<input type="submit" class="color" value="予約変更を中止する">';
     print'</form>';
+}
 ?>
 </body>
 </html>

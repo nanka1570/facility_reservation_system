@@ -21,13 +21,27 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // フラグの状態を変数に格納
 // $use_extension_flag = ($result['use_extension'] ?? 'N') === 'Y';
+// $use_extension_flag = $result['use_extension'] === 'Y';
+// $rental_flag = $result['rental_flag'] === 'R';
+// $price_flag = $result['price_flag'] === 'P';
+// $equipment_flag = $result['equipment_flag'] === 'E';
+
+// // display styleを決定する関数
+// function getDisplayStyle($flag) {
+//     return $flag ? 'block' : 'none';
+//}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// フラグの状態を変数に格納(時間延長機能を追加)
 $use_extension_flag = $result['use_extension'] === 'Y';
 $rental_flag = $result['rental_flag'] === 'R';
 $price_flag = $result['price_flag'] === 'P';
 $equipment_flag = $result['equipment_flag'] === 'E';
-
-// display styleを決定する関数
+$time_extension_flag = $result['time_extension_flag'] === 'T';
+//display styleを決定する関数
 function getDisplayStyle($flag) {
     return $flag ? 'block' : 'none';
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
 ?>

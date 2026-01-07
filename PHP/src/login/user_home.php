@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<?php
+// if(file_exists("../common/user_basic.css")){
+//     $css='../common/user_basic.css';
+// }else if(file_exists("../../common/user_basic.css")){
+//     $css='../../common/user_basic.css';
+// }
+?>
+<link rel="stylesheet" href="<?php //print $css ?>">
 <meta charset="UTF-8">
 <?php
 //title,label
@@ -9,105 +17,15 @@ if(isset($_SESSION['pagename'])==false){
 }
 ?>
 <title><?php print $_SESSION['pagename'] ?></title>
-<style>
-.body_home{
-    margin:0;
-    padding: 0;
-    overflow:scroll;
-    background-color: beige;
-}
-.table_home{
-    position: fixed;
-    top: 00px;
-    width: 100%;
-    border-color: black;
-    border-style: solid;
-    border-collapse: collapse;
-    z-index: 10;
-}
-.label_home{
-    position: absolute;
-    background-color: green;
-    top: 30px;
-    left: 30%;
-    width: 40%;
-    height: 35px;
-    text-align: center;
-    color: orangered;
-    font-family: "HGP行書体";
-    border-radius: 15px;
-}
-.user{
-    position: absolute;
-    top: 75px;
-    left:5px;
-    font-size:70%
-}
-.th_home{
-    height: 100px;
-    font-size: 150%;
-    background-color: cadetblue;
-}
-.td_home{
-    height: 40px;
-    text-align:center ;
-    font-family: "HGP創英ﾌﾟﾚｾﾞﾝｽEB";
-    font-size: 130%;
-    border-style: solid ;
-    background-color: royalblue;
-}
-.a_home{
-    color:whitesmoke;
-    text-decoration:none;
-}
-a:hover{
-    color: red;
-}
-.toppage{
-    position: absolute;
-    top :0;
-    left:0;
-    height: 25px;
-    border-radius: 0;
-    border-color: black;
-}
-.page_top{
-    width: 40%;
-    position: absolute;
-    top:0;
-    left: 30%;
-    height: 25px;
-    border-color: black;
-}
-.logout{
-    position: absolute;
-    top:0;
-    right: 0;
-    height: 25px;
-    width: 80px;
-    border-radius: 0;
-    border-color: black;
-}
-.pagename{
-    border-color: royalblue;
-    background-color: royalblue;
-    color: whitesmoke;
-    font-size: 100%;
-    font-family: "HGP創英ﾌﾟﾚｾﾞﾝｽEB";
-    border-style: none;
-}
-</style>
 
 </head>
-<body class="body_home">
+<body style='margin:0; padding: 0; overflow:scroll; background-color: beige;'>
 <?php
 //include session
 if(file_exists("../common/session.php")){
     include_once '../common/session.php';
 }else if(file_exists("../../common/session.php")){
     include_once '../../common/session.php';
-}else if(file_exists("../../common/session.php")){
-    include_once '../../../common/session.php';
 }
 //トップページ(user_home)
 if(file_exists("user_home.php")){
@@ -159,30 +77,120 @@ if(file_exists("rireki.php")){
 }
 ?>
     調整<br>調整<br>調整<br>調整<br>調整<br>調整<br><br>
-    <table class="table_home">
+    <table style='position: fixed; top: 00px; width: 100%;
+                  border-color: black; border-style: solid; border-collapse: collapse;
+                  z-index: 10;'>
         <colgroup>
             <col span="3" width=30%>
         </colgroup>
         <tr>
-	    <th class="th_home" colspan="3">
-            <p class="a_home" href="user_top.php">
-                <label class="label_home"><?php print $_SESSION['pagename'] ?>🦐</label>
+	    <th class="th_home" 
+            style='
+                height: 110px;
+                font-size: 150%;
+                background-color: cadetblue;'
+            colspan="3">
+            <p style='color:whitesmoke; text-decoration:none;' href="user_top.php">
+                <label style='position: absolute;
+                              background-color: green;
+                              top: 45px; left: 30%;
+                              width: 40%; height: 35px;
+                              text-align: center; color: orangered; font-family: "HGP行書体"; font-weight: 700;
+                              border-radius: 15px;'>
+                <?php print $_SESSION['pagename'] ?>🦐</label>
             </p>
-            <label class="user"><?php print $_SESSION['user_name'] ?>さんログイン中</label>
-            <input type="button" class="page_top" id="page_top" value="ページトップへ">
-        <?php print'<form action="'.$logout.'" method="post"><input type="submit" class="logout" name="pagename" value="ログアウト"></form>'; ?>
-        <?php print'<form action="'.$toppage.'" method="post"><input type="submit" class="toppage" name="pagename" value="トップページ"></form>'; ?>
+            <label style='position: absolute; top: 85px; left:5px; margin:0;
+                          font-size:70%; font-weight:700; font-family: Helvetica Neue; color:#333;'>
+                <?php print $_SESSION['user_name'] ?>さんログイン中</label>
+            <input type="button" id="page_top"
+                style='
+                    position: absolute;
+                    width: 40%; height: 35px;
+                    color:black; font-size:18px; font-family: "游明朝"; font-weight: 500;
+                    background-color: gold;
+                    top:1px; left: 30%;
+                    padding:0px;
+                    border:2px; border-style:outset; border-color: black; border-radius: 3px;'
+                value="ページトップへ">
+        <?php print'<form action="'.$logout.'" method="post">'?>
+        <input type="submit"
+                style='
+                    position: absolute;
+                    color:black; font-size:18px; font-family: "游明朝"; font-weight: 500;
+                    top:1px; right: 1px;
+                    height: 35px; width: 100px;
+                    background-color: tomato;
+                    padding:0px;
+                    border:2px; border-style:outset; border-color:red; border-radius: 3px;'
+                value="ログアウト"></form>
+        <?php print'<form action="'.$toppage.'" method="post">';?>
+        <input type="submit" 
+                style='
+                    position: absolute;
+                    color:black; font-size:18px; font-family: "游明朝"; font-weight: 500;
+                    background-color: aqua;
+                    top :1px; left:1px;
+                    height: 35px; width:125px;
+                    padding:0px;
+                    border:2px; border-style:outset; border-color:blue; border-radius: 3px;'
+                name="pagename" value="ホームページ"></form>
         </th>
         </tr>
         <tr>
-        <?php
-        print'<form method="post" action="'.$reservation.'" ><td class="td_home" colspan="1">';
-        print'<input type="submit" class="pagename" value="利用予約"></td></form>';
-        print'<form method="post" action="'.$history.'"><td class="td_home" colspan="1">';
-        print'<input type="submit" class="pagename" value="利用履歴"></td></form>';
-        print'<form method="post" action="'.$inquily.'"><td class="td_home" colspan="1">';
-        print'<input type="submit" class="pagename" value="問合せ"></td></form>';
-        ?>
+<?php   print'<form method="post" action="'.$reservation.'" >';?>
+        <td style='
+                height: 40px;
+                text-align:center ;
+                font-family: "HGP創英ﾌﾟﾚｾﾞﾝｽEB";
+                font-size: 130%;
+                border-style: solid ;
+                background-color: royalblue;' 
+        colspan="1">
+        <input type="submit" class="pagename" 
+                style='
+                    border-color: royalblue;
+                    background-color: royalblue;
+                    color: whitesmoke;
+                    font-size: 100%; font-family: "HGP創英ﾌﾟﾚｾﾞﾝｽEB";
+                    border-style: none;
+                    padding:5px;'
+                value="利用予約"></td></form>
+<?php   print'<form method="post" action="'.$history.'">';?>
+        <td style='
+                height: 40px;
+                text-align:center ;
+                font-family: "HGP創英ﾌﾟﾚｾﾞﾝｽEB";
+                font-size: 130%;
+                border-style: solid ;
+                background-color: royalblue;' 
+        colspan="1">
+        <input type="submit" class="pagename" 
+                style='
+                    border-color: royalblue;
+                    background-color: royalblue;
+                    color: whitesmoke;
+                    font-size: 100%; font-family: "HGP創英ﾌﾟﾚｾﾞﾝｽEB";
+                    border-style: none;
+                    padding:5px;'
+                value="利用履歴"></td></form>
+<?php   print'<form method="post" action="'.$inquily.'">';?>
+        <td style='
+                height: 40px;
+                text-align:center ;
+                font-family: "HGP創英ﾌﾟﾚｾﾞﾝｽEB";
+                font-size: 130%;
+                border-style: solid ;
+                background-color: royalblue;' 
+        colspan="1">
+        <input type="submit" class="pagename" 
+                style='
+                    border-color: royalblue;
+                    background-color: royalblue;
+                    color: whitesmoke;
+                    font-size: 100%; font-family: "HGP創英ﾌﾟﾚｾﾞﾝｽEB";
+                    border-style: none;
+                    padding:5px;' 
+                value="問合せ"></td></form>
         </tr>
     </table>
 

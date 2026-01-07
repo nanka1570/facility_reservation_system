@@ -6,6 +6,7 @@ include_once "../../common/session.php";
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="../../common/user_basic.css">
 <link rel="stylesheet" href="reservation.css">
 <title></title>
 </head>
@@ -123,11 +124,11 @@ try
         echo '<h2 class="check">予約が完了しました。<h2><br>';
         echo '<p class="check">予約番号：' . htmlspecialchars($reservation_number) . '</p>';
         print'<form action="../../login/user_home.php">';
-            print'<p class="buttons"><input type="submit" class="button" value="ホーム画面に戻る"></p>';
+            print'<p class="buttons"><input type="submit" class="color" value="ホーム画面に戻る"></p>';
         print'</form>';
         print'<p class="check">もう一度予約する場合はこちら</p>';
         print'<form action="room.php">';
-            print'<p class="buttons"><input type="submit" class="button" value="予約画面へ"></p>';
+            print'<p class="buttons"><input type="submit" class="color" value="予約画面へ"></p>';
         print'</form>';
     }
     else
@@ -139,11 +140,11 @@ try
 
         echo '<h2 class="check">予約をキャンセルしました</h2><br>';
         print'<form action="../../login/user_home.php">';
-            print'<p class="buttons"><input type="submit" class="button" value="ホーム画面に戻る"></p>';
+            print'<p class="buttons"><input type="submit" class="color" value="ホーム画面に戻る"></p>';
         print'</form>';
         print'<p class="check">もう一度予約する場合はこちら</p>';
         print'<form action="room.php">';
-            print'<p class="buttons"><input type="submit" class="button" value="予約画面へ"></p>';
+            print'<p class="buttons"><input type="submit" class="color" value="予約画面へ"></p>';
         print'</form>';
     }        
 }

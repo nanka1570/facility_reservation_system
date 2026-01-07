@@ -14,18 +14,8 @@ if(isset($_POST['user_Id']))
 <link rel="stylesheet" href="login.css">
 </head>
 <body>
-<input type="button" onclick="location.href='company.php'"
-                style='
-                    position: absolute;
-                    width: 200px; height: 35px;
-                    color:black; font-size:18px; font-family: "游明朝"; font-weight: 500;
-                    background-color: gold;
-                    top:10px; left: 10px;
-                    padding:0px;
-                    border:2px; border-style:outset; border-color: black; border-radius: 3px;'
-                value="企業トップページへ">
-   <p class="login">施設予約システム<br>
-    ユーザーログイン</p><br />
+   
+    <p class="login">ユーザーログイン</p><br />
     
     <div class=bg>
     </br>

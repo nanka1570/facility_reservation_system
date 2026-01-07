@@ -147,31 +147,31 @@ function addFacility($data) {
             ]);
         }
 
-        // // 備品の追加
-        // if (!empty($data['item_name'])) {
-        //     // 同様に備品の重複チェックを追加できます
-        //     $stmt_duplicate_item = $dbh->prepare("SELECT COUNT(*) FROM item_table WHERE item_name = ?");
-        //     $stmt_duplicate_item->execute([$data['item_name']]);
-        //     $duplicate_item_count = $stmt_duplicate_item->fetchColumn();
+        // 備品の追加
+        if (!empty($data['item_name'])) {
+            // 同様に備品の重複チェックを追加できます
+            $stmt_duplicate_item = $dbh->prepare("SELECT COUNT(*) FROM item_table WHERE item_name = ?");
+            $stmt_duplicate_item->execute([$data['item_name']]);
+            $duplicate_item_count = $stmt_duplicate_item->fetchColumn();
             
-        //     if ($duplicate_item_count > 0) {
-        //         throw new Exception("「{$data['item_name']}」という備品名は既に存在します。別の備品名を入力してください。");
-        //     }
+            if ($duplicate_item_count > 0) {
+                throw new Exception("「{$data['item_name']}」という備品名は既に存在します。別の備品名を入力してください。");
+            }
 
-        //     $sql_item = 'INSERT INTO item_table (
-        //                 item_number, 
-        //                 item_name, 
-        //                 total_of_item, 
-        //                 rental_unit_price
-        //             ) VALUES ((SELECT COALESCE(MAX(item_number)+1,0)FROM item_table), ?, ?, ?)';
+            $sql_item = 'INSERT INTO item_table (
+                        item_number, 
+                        item_name, 
+                        total_of_item, 
+                        rental_unit_price
+                    ) VALUES ((SELECT COALESCE(MAX(item_number)+1,0)FROM item_table), ?, ?, ?)';
 
-        //     $stmt_item = $dbh->prepare($sql_item);
-        //     $stmt_item->execute([
-        //         $data['item_name'],
-        //         $data['total_of_item'],
-        //         $data['rental_unit_price'] ?? 0
-        //     ]);
-        // }
+            $stmt_item = $dbh->prepare($sql_item);
+            $stmt_item->execute([
+                $data['item_name'],
+                $data['total_of_item'],
+                $data['rental_unit_price'] ?? 0
+            ]);
+        }
 
         return [
             'category_number' => $category_number,
@@ -236,38 +236,38 @@ function updateFacility($data) {
             }
         }
 
-        // // 備品情報の更新
-        // if (!empty($data['item_number'])) {
-        //     // 現在の備品情報を取得
-        //     $stmt = $dbh->prepare("SELECT * FROM item_table WHERE item_number = ?");
-        //     $stmt->execute([$data['item_number']]);
-        //     $current_item = $stmt->fetch(PDO::FETCH_ASSOC);
+        // 備品情報の更新
+        if (!empty($data['item_number'])) {
+            // 現在の備品情報を取得
+            $stmt = $dbh->prepare("SELECT * FROM item_table WHERE item_number = ?");
+            $stmt->execute([$data['item_number']]);
+            $current_item = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        //     $item_updates = [];
-        //     $params = [':item_number' => $data['item_number']];
+            $item_updates = [];
+            $params = [':item_number' => $data['item_number']];
             
-        //     $update_fields = [
-        //         'item_name' => '備品名',
-        //         'total_of_item' => '備品総数',
-        //         'rental_unit_price' => '貸出単価'
-        //     ];
+            $update_fields = [
+                'item_name' => '備品名',
+                'total_of_item' => '備品総数',
+                'rental_unit_price' => '貸出単価'
+            ];
 
-        //     foreach ($update_fields as $field => $label) {
-        //         if (isset($data[$field]) && $data[$field] !== '' && 
-        //             $current_item[$field] != $data[$field]) {
-        //             $item_updates[] = "$field = :$field";
-        //             $params[":$field"] = $data[$field];
-        //             $changed_fields[] = "$label: {$data[$field]}";
-        //         }
-        //     }
+            foreach ($update_fields as $field => $label) {
+                if (isset($data[$field]) && $data[$field] !== '' && 
+                    $current_item[$field] != $data[$field]) {
+                    $item_updates[] = "$field = :$field";
+                    $params[":$field"] = $data[$field];
+                    $changed_fields[] = "$label: {$data[$field]}";
+                }
+            }
 
-        //     if (!empty($item_updates)) {
-        //         $sql = "UPDATE item_table SET " . implode(', ', $item_updates) . 
-        //                " WHERE item_number = :item_number";
-        //         $stmt = $dbh->prepare($sql);
-        //         $stmt->execute($params);
-        //     }
-        // }
+            if (!empty($item_updates)) {
+                $sql = "UPDATE item_table SET " . implode(', ', $item_updates) . 
+                       " WHERE item_number = :item_number";
+                $stmt = $dbh->prepare($sql);
+                $stmt->execute($params);
+            }
+        }
 
         return [
             'changed_fields' => $changed_fields,
@@ -373,25 +373,25 @@ function getFacilityAndItemsForDelete($room_number, $delete_items_list = []) {
         $stmt_facility->execute();
         $facility_data = $stmt_facility->fetch(PDO::FETCH_ASSOC);
 
-        // // 選択された備品情報の取得
-        // $items_data = [];
-        // if (!empty($delete_items_list)) {
-        //     $placeholders = str_repeat('?,', count($delete_items_list) - 1) . '?';
-        //     $sql_items = "SELECT 
-        //         item_number,
-        //         item_name,
-        //         total_of_item,
-        //         rental_unit_price
-        //         FROM item_table 
-        //         WHERE item_number IN ($placeholders)";
-        //     $stmt_items = $dbh->prepare($sql_items);
-        //     $stmt_items->execute($delete_items_list);
-        //     $items_data = $stmt_items->fetchAll(PDO::FETCH_ASSOC);
-        // }
+        // 選択された備品情報の取得
+        $items_data = [];
+        if (!empty($delete_items_list)) {
+            $placeholders = str_repeat('?,', count($delete_items_list) - 1) . '?';
+            $sql_items = "SELECT 
+                item_number,
+                item_name,
+                total_of_item,
+                rental_unit_price
+                FROM item_table 
+                WHERE item_number IN ($placeholders)";
+            $stmt_items = $dbh->prepare($sql_items);
+            $stmt_items->execute($delete_items_list);
+            $items_data = $stmt_items->fetchAll(PDO::FETCH_ASSOC);
+        }
 
         return [
             'facility' => $facility_data,
-            // 'items' => $items_data
+            'items' => $items_data
         ];
     } catch (Exception $e) {
         throw $e;
@@ -467,15 +467,15 @@ function executeDelete($data) {
             $stmt_update->execute($params);
         }
 
-        // // 備品の削除
-        // if (!empty($delete_items_list)) {
-        //     foreach ($delete_items_list as $item_id) {
-        //         $sql_delete_item = "DELETE FROM item_table WHERE item_number = :item_number";
-        //         $stmt_delete_item = $dbh->prepare($sql_delete_item);
-        //         $stmt_delete_item->bindValue(':item_number', $item_id, PDO::PARAM_INT);
-        //         $stmt_delete_item->execute();
-        //     }
-        // }
+        // 備品の削除
+        if (!empty($delete_items_list)) {
+            foreach ($delete_items_list as $item_id) {
+                $sql_delete_item = "DELETE FROM item_table WHERE item_number = :item_number";
+                $stmt_delete_item = $dbh->prepare($sql_delete_item);
+                $stmt_delete_item->bindValue(':item_number', $item_id, PDO::PARAM_INT);
+                $stmt_delete_item->execute();
+            }
+        }
 
         return [
             'success' => true,
