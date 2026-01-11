@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from "react"
-import { supabase } from "../lib/supabase"
+import { supabase } from "@/src/lib/supabase"
+import { useRouter } from "next/router"
 
 export default function Auth() {
     const [isLoginMode, setIsLoginMode] = useState(true)
@@ -9,9 +10,12 @@ export default function Auth() {
     const [password, setPassword] = useState('')
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
+    const router = useRouter() //next.jsの画面遷移
 
        const handleSubmit = async (e: React.FormEvent) => {
+        //ページリロードを防ぐ
         e.preventDefault()
+        //ローディング開始、メッセージクリア
         setLoading(true)
         setMessage('')
         //ログイン
@@ -22,6 +26,8 @@ export default function Auth() {
             })
             if( error ){
                 setMessage('ログインに失敗しました: ' + error.message)
+            }else {
+                router.push('@/src/Dashboard')
             }
         //新規登録
         }else{
@@ -35,6 +41,7 @@ export default function Auth() {
                 setMessage('確認メールを送信しました。メールをご確認ください。')
             }
         }
+        //ローディング終了
         setLoading(false)
        } 
     return (
