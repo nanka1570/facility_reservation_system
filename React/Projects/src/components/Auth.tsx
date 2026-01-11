@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from "react"
-import { supabase } from "@/src/lib/supabase"
-import { useRouter } from "next/router"
+import { supabase } from "@/lib/supabase"
+import { useRouter } from "next/navigation"
 
 export default function Auth() {
     const [isLoginMode, setIsLoginMode] = useState(true)
@@ -27,7 +27,7 @@ export default function Auth() {
             if( error ){
                 setMessage('ログインに失敗しました: ' + error.message)
             }else {
-                router.push('@/src/Dashboard')
+                router.push('/dashboard')
             }
         //新規登録
         }else{

@@ -1,26 +1,23 @@
 'use client'
 
-import { supabase } from "@/src/lib/supabase"
-import { useRouter } from "next/router" //next.jsの画面遷移
+import { supabase } from "@/lib/supabase"
+import { useRouter } from "next/navigation" //next.jsの画面遷移
 
 export default function Dashboard() {
     const router = useRouter()
 
     const handleLogout = async () => {
-        const logout = await supabase.auth.signOut({
-            email,
-            password,
-        })
-        if (logout){
+        const { error } = await supabase.auth.signOut()
+        if (!error){
             router.push('/')
         }
     }
     return (
         <div>
+            <p>こんにちは、ゲストさん</p>
             <button
              onClick={handleLogout}
              >ログアウト</button>
-            <p>こんにちは、ゲストさん</p>
         </div>
     )
 }
